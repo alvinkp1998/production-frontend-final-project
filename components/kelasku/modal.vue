@@ -1,17 +1,16 @@
 <template>
   <div>
     <div class="d-flex justify-content-around align-items-center flex-wrap">
-      <a
-        type="button"
-        class="btn btn-secondary pill btn-sm mt-1 arrow"
-        data-toggle="modal"
-        :data-target="`#${namaKelas}`"
-      >
-        <span>Detail Kelas</span>
-      </a>
-      <button @click="confirmGabung" class="btn btn-primary btn-sm pill arrow">
-        <span>Gabung kelas</span>
+      <button @click="redirectClass" class="btn btn-primary btn-sm pill arrow">
+        <span>Lihat Kelas</span>
       </button>
+      <a
+        @click="leaveClass"
+        type="button"
+        class="btn btn-secondary pill btn-sm mt-1"
+      >
+        Keluar Kelas
+      </a>
     </div>
 
     <div
@@ -111,11 +110,11 @@
                 Tutup
               </button>
               <button
-                @click="confirmGabung"
+                @click="redirectClass"
                 type="button"
                 class="btn btn-primary pill"
               >
-                Gabung kelas
+                Lihat Kelas
               </button>
             </div>
           </div>
@@ -143,20 +142,20 @@ export default {
       $(".modal").modal("hide");
       this.$router.push(`${this.namaKelas}/kelas`);
     },
-    confirmGabung() {
+    leaveClass() {
       this.$swal({
         title: "Apakah kamu yakin?",
-        text: `Ingin bergabung dengan kelas ${this.namaKelas}.`,
+        text: `Ingin keluar dari kelas ${this.namaKelas}`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Ya, bergabung"
+        confirmButtonText: "Yakin"
       }).then(result => {
         if (result.isConfirmed) {
           this.$swal(
             "Berhasil!",
-            `Kamu berhasil bergabung dengan kelas ${this.namaKelas}.`,
+            `Kamu berhasil keluar dari kelas ${this.namaKelas}.`,
             "success"
           );
         }

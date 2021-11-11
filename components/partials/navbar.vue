@@ -52,7 +52,7 @@
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item nav-profile dropdown">
+          <!-- <li class="nav-item nav-profile dropdown">
             <a
               class="nav-link dropdown-toggle"
               id="profileDropdown"
@@ -77,18 +77,28 @@
                 Activity Log
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="#" @click="logout">
                 <i class="mdi mdi-logout mr-2 text-primary"></i>
                 Signout
               </a>
             </div>
-          </li>
+          </li> -->
           <li class="nav-item d-none d-lg-block full-screen-link">
             <a class="nav-link">
               <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
             </a>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item">
+            <button class="btn btn-primary btn-sm" @click="toLogin">
+              Login
+            </button>
+          </li>
+          <li class="nav-item ml-2">
+            <button class="btn btn-primary btn-sm" @click="toRegister">
+              Sign up
+            </button>
+          </li>
+          <!-- <li class="nav-item dropdown">
             <a
               class="nav-link count-indicator dropdown-toggle"
               id="messageDropdown"
@@ -167,8 +177,8 @@
               <div class="dropdown-divider"></div>
               <h6 class="p-3 mb-0 text-center">4 new messages</h6>
             </div>
-          </li>
-          <li class="nav-item dropdown">
+          </li> -->
+          <!-- <li class="nav-item dropdown">
             <a
               class="nav-link count-indicator dropdown-toggle"
               id="notificationDropdown"
@@ -240,17 +250,17 @@
               <div class="dropdown-divider"></div>
               <h6 class="p-3 mb-0 text-center">See all notifications</h6>
             </div>
-          </li>
-          <li class="nav-item nav-logout d-none d-lg-block">
+          </li> -->
+          <!-- <li class="nav-item nav-logout d-none d-lg-block">
             <a class="nav-link" href="#">
               <i class="mdi mdi-power"></i>
             </a>
-          </li>
-          <li class="nav-item nav-settings d-none d-lg-block">
+          </li> -->
+          <!-- <li class="nav-item nav-settings d-none d-lg-block">
             <a class="nav-link" href="#">
               <i class="mdi mdi-format-line-spacing"></i>
             </a>
-          </li>
+          </li> -->
         </ul>
         <button
           class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
@@ -269,3 +279,20 @@
   color: black;
 }
 </style>
+
+<script>
+export default {
+  methods: {
+    async logout() {
+      await this.$auth.logout();
+      this.$router.push("/login");
+    },
+    toLogin() {
+      this.$router.push("/login");
+    },
+    toRegister() {
+      this.$router.push("/register");
+    }
+  }
+};
+</script>

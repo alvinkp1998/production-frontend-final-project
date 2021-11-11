@@ -18,20 +18,30 @@
               <input
                 type="email"
                 class="form-control mb-2"
+                placeholder="Masukkan email anda"
                 v-model="login.email"
               />
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                v-model="login.password"
-              />
+              <div class="input-group">
+                <input
+                  :type="showPassword ? 'password' : 'text'"
+                  class="form-control"
+                  placeholder="Masukkan password"
+                  v-model="login.password"
+                />
+                <div class="input-group-append">
+                  <i
+                    :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
+                    @click="showPassword = !showPassword"
+                  ></i>
+                </div>
+              </div>
             </div>
 
             <div class="mt-4 ">
-              <a href="/">
+              <a href="/belom">
                 Forgot password?
               </a>
               <button
@@ -42,7 +52,9 @@
                 Log in
               </button>
               <div class="text-center mt-3">
-                <a href="/" class="text-center">Create an account</a>
+                <nuxt-link to="/register" class="text-center"
+                  >Create an account</nuxt-link
+                >
               </div>
             </div>
           </form>
@@ -55,12 +67,14 @@
 <script>
 export default {
   layout: "login",
+  auth: false,
   data() {
     return {
       login: {
-        username: "",
+        email: "",
         password: ""
-      }
+      },
+      showPassword: true
     };
   },
   methods: {
@@ -70,6 +84,13 @@ export default {
           data: this.login
         });
         console.log(response);
+        this.$swal({
+          icon: "success",
+          title: "Selamat Datang",
+          text: "Kamu berhasil login",
+          timer: 2000
+        });
+        this.$router.push("/");
       } catch (err) {
         console.log(err);
       }

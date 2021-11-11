@@ -15,3 +15,8 @@
   margin: auto;
 }
 </style>
+<script>
+export default {
+  auth: false
+};
+</script>

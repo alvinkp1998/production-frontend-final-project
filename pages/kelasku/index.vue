@@ -6,7 +6,7 @@
         v-for="item in listClass"
         :key="item.id"
       >
-        <class-item
+        <kelasku-item
           :id="item.id"
           :name="item.name"
           :desc="item.desc"
@@ -19,7 +19,6 @@
 
 <script>
 export default {
-  auth: false,
   data() {
     return {
       listClass: [

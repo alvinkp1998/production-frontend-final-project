@@ -62,24 +62,25 @@ export default {
     // Nuxt Auth
     "@nuxtjs/auth-next"
   ],
-  // router: {
-  //   middleware: ["auth"]
-  // },
+  router: {
+    middleware: ["auth"]
+  },
   auth: {
     strategies: {
       local: {
         token: {
           property: "token",
-          global: true
+          global: true,
+          type: false
           // required: true,
           // type: 'Bearer'
         },
         user: {
-          property: "user"
+          property: "data"
           // autoFetch: true
         },
         endpoints: {
-          login: { url: "/api/auth/login", method: "post" },
+          login: { url: "/login", method: "post" },
           logout: { url: "/api/auth/logout", method: "post" },
           user: { url: "/api/auth/user", method: "get" }
         }
