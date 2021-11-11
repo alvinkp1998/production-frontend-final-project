@@ -58,7 +58,9 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     // Sweet Alert Nuxt
-    "vue-sweetalert2/nuxt"
+    "vue-sweetalert2/nuxt",
+    // Nuxt Auth
+    "@nuxtjs/auth-next"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
