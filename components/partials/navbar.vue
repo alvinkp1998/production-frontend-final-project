@@ -52,7 +52,7 @@
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          <!-- <li class="nav-item nav-profile dropdown">
+          <li class="nav-item nav-profile dropdown">
             <a
               class="nav-link dropdown-toggle"
               id="profileDropdown"
@@ -82,13 +82,13 @@
                 Signout
               </a>
             </div>
-          </li> -->
+          </li>
           <li class="nav-item d-none d-lg-block full-screen-link">
             <a class="nav-link">
               <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <button class="btn btn-primary btn-sm" @click="toLogin">
               Login
             </button>
@@ -97,8 +97,8 @@
             <button class="btn btn-primary btn-sm" @click="toRegister">
               Sign up
             </button>
-          </li>
-          <!-- <li class="nav-item dropdown">
+          </li> -->
+          <li class="nav-item dropdown">
             <a
               class="nav-link count-indicator dropdown-toggle"
               id="messageDropdown"
@@ -177,8 +177,9 @@
               <div class="dropdown-divider"></div>
               <h6 class="p-3 mb-0 text-center">4 new messages</h6>
             </div>
-          </li> -->
-          <!-- <li class="nav-item dropdown">
+          </li>
+
+          <li class="nav-item dropdown">
             <a
               class="nav-link count-indicator dropdown-toggle"
               id="notificationDropdown"
@@ -250,13 +251,14 @@
               <div class="dropdown-divider"></div>
               <h6 class="p-3 mb-0 text-center">See all notifications</h6>
             </div>
-          </li> -->
-          <!-- <li class="nav-item nav-logout d-none d-lg-block">
+          </li>
+          <!-- 
+          <li class="nav-item nav-logout d-none d-lg-block">
             <a class="nav-link" href="#">
               <i class="mdi mdi-power"></i>
             </a>
-          </li> -->
-          <!-- <li class="nav-item nav-settings d-none d-lg-block">
+          </li>
+          <li class="nav-item nav-settings d-none d-lg-block">
             <a class="nav-link" href="#">
               <i class="mdi mdi-format-line-spacing"></i>
             </a>

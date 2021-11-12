@@ -62,9 +62,9 @@ export default {
     // Nuxt Auth
     "@nuxtjs/auth-next"
   ],
-  router: {
-    middleware: ["auth"]
-  },
+  // router: {
+  //   middleware: ["auth"]
+  // },
   auth: {
     strategies: {
       local: {
