@@ -34,7 +34,7 @@ export default {
         {
           id: 2,
           name: "Mastery Node js",
-          desc: "Ini kelas Node.js",
+          desc: "Ini deskripsi kelas Node.js",
           img:
             "https://static.cdn-cdpl.com/source/998b78e349061b4971c0a2b0e8d6be41/nodejs-frameworks.png"
         },
