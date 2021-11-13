@@ -52,7 +52,7 @@
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          <!-- <li class="nav-item nav-profile dropdown">
+          <li class="nav-item nav-profile dropdown" v-if="$auth.user">
             <a
               class="nav-link dropdown-toggle"
               id="profileDropdown"
@@ -65,7 +65,7 @@
                 <span class="availability-status online"></span>
               </div>
               <div class="nav-profile-text">
-                <p class="mb-1 text-black">Alvin Kusuma</p>
+                <p class="mb-1 text-black">{{ $auth.user.nama }}</p>
               </div>
             </a>
             <div
@@ -82,18 +82,18 @@
                 Signout
               </a>
             </div>
-          </li> -->
+          </li>
           <li class="nav-item d-none d-lg-block full-screen-link">
             <a class="nav-link">
               <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="!$auth.user">
             <button class="btn btn-primary btn-sm" @click="toLogin">
               Login
             </button>
           </li>
-          <li class="nav-item ml-2">
+          <li class="nav-item ml-2" v-if="!$auth.user" s>
             <button class="btn btn-primary btn-sm" @click="toRegister">
               Sign up
             </button>

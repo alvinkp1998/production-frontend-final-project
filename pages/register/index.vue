@@ -25,7 +25,7 @@
             <label class="btn btn-primary active">
               <input
                 type="radio"
-                name="options"
+                name="user"
                 id="option1"
                 autocomplete="off"
                 checked
@@ -35,30 +35,44 @@
             <label class="btn btn-primary">
               <input
                 type="radio"
-                name="options"
+                name="admin"
                 id="option2"
                 autocomplete="off"
               />
               Tutor
             </label>
           </div>
-          <form>
+          <form @submit.prevent="submitForm">
             <div class="mt-3">
               <div class="form-group">
-                <label for="email">Your Email</label>
-                <input type="email" class="form-control mb-2" />
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  class="form-control mb-2"
+                  placeholder="Your email address"
+                  v-model="email"
+                  required
+                />
               </div>
               <div class="form-group">
-                <label for="firstname">First Name</label>
-                <input type="text" class="form-control" />
+                <label for="firstname">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Your name"
+                  v-model="nama"
+                  required
+                />
               </div>
               <div class="form-group">
-                <label for="lastname">Last Name</label>
-                <input type="text" class="form-control" />
-              </div>
-              <div class="form-group">
-                <label for="createpassword">Create a password</label>
-                <input type="password" class="form-control" />
+                <label for="createpassword">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Your password"
+                  v-model="password"
+                  required
+                />
                 <small id="passwordHelpBlock" class="form-text text-muted">
                   Your password must be 8-20 characters long, contain letters
                   and numbers.
@@ -66,7 +80,13 @@
               </div>
               <div class="form-group">
                 <label for="createpassword">Confirm password</label>
-                <input type="password" class="form-control" />
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Confirm password"
+                  v-model="passwordConfirm"
+                  required
+                />
               </div>
             </div>
             <div class="bottom mb-2">
@@ -88,7 +108,47 @@
 <script>
 export default {
   layout: "login",
-  auth: false
+  auth: false,
+  data() {
+    return {
+      email: "",
+      nama: "",
+      password: "",
+      passwordConfirm: ""
+    };
+  },
+  methods: {
+    async submitForm() {
+      try {
+        let payload = {
+          email: this.email,
+          nama: this.nama,
+          password: this.password,
+          passwordConfirm: this.passwordConfirm
+        };
+        const response = await this.$axios.post("/register", payload);
+        console.log(response);
+        // await this.$auth.loginWith("local", {
+        //   data: {
+        //     email: this.email,
+        //     nama: this.nama,
+        //     password: this.password,
+        //     passwordConfirm: this.passwordConfirm
+        //   }
+        // });
+        this.$swal({
+          icon: "success",
+          title: "Registrasi Berhasil",
+          timer: 3000
+        });
+        this.$router.push("/login");
+
+        // console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
 };
 </script>
 

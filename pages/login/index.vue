@@ -12,7 +12,7 @@
       </div>
       <div class="col-md-6">
         <div class="container mt-5">
-          <form @submit.prevent="userLogin">
+          <form @submit.prevent="submitLogin">
             <div class="form-group">
               <label for="email">Email</label>
               <input
@@ -78,7 +78,7 @@ export default {
     };
   },
   methods: {
-    async userLogin() {
+    async submitLogin() {
       try {
         let response = await this.$auth.loginWith("local", {
           data: this.login
