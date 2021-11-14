@@ -82,11 +82,11 @@ export default {
         },
         endpoints: {
           login: { url: "api/login", method: "post" },
-          logout: { url: "/api/auth/logout", method: "post" },
           user: {
-            url: "api/user/c8f538b1-ca67-450c-ad5a-5691e5196f6e",
+            url: `api/user/c8f538b1-ca67-450c-ad5a-5691e5196f6e`,
             method: "get"
-          }
+          },
+          logout: false
         }
       }
     }

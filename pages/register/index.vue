@@ -47,40 +47,58 @@
               <div class="form-group">
                 <label for="email">Email</label>
                 <input
+                  id="email"
                   type="email"
-                  class="form-control mb-2"
+                  :class="
+                    invalid
+                      ? `form-control is-invalid mb-2`
+                      : 'form-control mb-2'
+                  "
                   placeholder="Your email address"
                   v-model="email"
                   required
                 />
+
+                <div class="invalid-feedback">
+                  Format email salah.
+                </div>
               </div>
               <div class="form-group">
-                <label for="firstname">Name</label>
+                <label for="name">Name</label>
                 <input
+                  id="name"
                   type="text"
-                  class="form-control"
+                  :class="invalid ? `form-control is-invalid` : 'form-control'"
                   placeholder="Your name"
                   v-model="nama"
                   required
                 />
+                <div class="invalid-feedback">
+                  Nama wajib diisi
+                </div>
               </div>
               <div class="form-group">
-                <label for="createpassword">Password</label>
+                <label for="createPassword">Password</label>
                 <input
+                  id="createPassword"
                   type="password"
-                  class="form-control"
+                  :class="invalid ? `form-control is-invalid` : 'form-control'"
                   placeholder="Your password"
                   v-model="password"
                   required
                 />
+                <div class="invalid-feedback">
+                  Password wajib diisi
+                </div>
                 <small id="passwordHelpBlock" class="form-text text-muted">
                   Your password must be 8-20 characters long, contain letters
                   and numbers.
                 </small>
               </div>
               <div class="form-group">
-                <label for="createpassword">Confirm password</label>
+                <label for="createConfirmPassword">Confirm password</label>
                 <input
+                  id="createConfirmPassword"
                   type="password"
                   class="form-control"
                   placeholder="Confirm password"
@@ -114,9 +132,11 @@ export default {
       email: "",
       nama: "",
       password: "",
-      passwordConfirm: ""
+      passwordConfirm: "",
+      invalid: false
     };
   },
+  // TRIGGER INVALID BELUM//
   methods: {
     async submitForm() {
       try {
@@ -126,8 +146,15 @@ export default {
           password: this.password,
           passwordConfirm: this.passwordConfirm
         };
+
         const response = await this.$axios.post("/register", payload);
         console.log(response);
+        this.$swal({
+          icon: "success",
+          title: "Registrasi Berhasil",
+          timer: 3000
+        });
+
         // await this.$auth.loginWith("local", {
         //   data: {
         //     email: this.email,
@@ -136,14 +163,8 @@ export default {
         //     passwordConfirm: this.passwordConfirm
         //   }
         // });
-        this.$swal({
-          icon: "success",
-          title: "Registrasi Berhasil",
-          timer: 3000
-        });
-        this.$router.push("/login");
 
-        // console.log(data);
+        this.$router.push("/login");
       } catch (error) {
         console.log(error);
       }
