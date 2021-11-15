@@ -34,6 +34,11 @@ export default {
     return {
       listSidebar: [
         {
+          name: "Home",
+          icon: "fas fa-home menu-icon",
+          to: "/"
+        },
+        {
           name: "Semua Kelas",
           icon: "fas fa-chalkboard menu-icon",
           to: "/list-class"
