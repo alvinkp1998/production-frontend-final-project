@@ -42,11 +42,13 @@
                   v-model="login.password"
                   required
                 />
-                <div class="input-group-append pt-3">
-                  <i
-                    :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
-                    @click="showPassword = !showPassword"
-                  ></i>
+                <div class="input-group-append eye">
+                  <span class="input-group-text bg-white"
+                    ><i
+                      :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
+                      @click="showPassword = !showPassword"
+                    ></i
+                  ></span>
                 </div>
               </div>
             </div>
@@ -133,5 +135,8 @@ export default {
 }
 .red-text {
   color: red !important;
+}
+.bg-white {
+  background-color: white;
 }
 </style>
