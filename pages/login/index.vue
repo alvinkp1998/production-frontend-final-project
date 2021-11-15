@@ -101,9 +101,9 @@ export default {
         if (this.$auth.user) {
           this.$swal({
             icon: "success",
-            title: "Selamat Datang",
+            title: `Hi, Selamat Datang ${this.$auth.user.nama}`,
             text: "Kamu berhasil login",
-            timer: 2000
+            timer: 3000
           });
           this.$router.push("/");
         } else {

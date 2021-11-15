@@ -12,7 +12,7 @@
           <div class="content-wrapper">
             <div class="page-header">
               <h3 class="page-title">
-                <nuxt-link to="/list-class">
+                <nuxt-link to="/">
                   <span
                     class="page-title-icon bg-gradient-primary text-white mr-2"
                   >
