@@ -52,7 +52,7 @@
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item nav-profile dropdown" v-if="$auth.user">
+          <li class="nav-item nav-profile dropdown" v-if="$auth">
             <a
               class="nav-link dropdown-toggle"
               id="profileDropdown"

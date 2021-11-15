@@ -81,9 +81,9 @@ export default {
           // autoFetch: true
         },
         endpoints: {
-          login: { url: "api/login", method: "post" },
+          login: { url: "login", method: "post" },
           user: {
-            url: `api/user/c8f538b1-ca67-450c-ad5a-5691e5196f6e`,
+            url: `user/me`,
             method: "get"
           },
           logout: false
@@ -94,22 +94,22 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    proxy: true,
+    // proxy: true,
     baseURL: "http://localhost:3000"
   },
 
-  proxy: {
-    "/api/": {
-      target: "http://localhost:3000",
-      pathRewrite: { "^/api/": "" },
-      changeOrigin: true
-    },
-    "/register": {
-      target: "http://localhost:3000",
-      pathRewrite: { "^/": "" },
-      changeOrigin: true
-    }
-  },
+  // proxy: {
+  //   "/api/": {
+  //     target: "http://localhost:3000",
+  //     pathRewrite: { "^/api/": "" },
+  //     changeOrigin: true
+  //   },
+  //   "/register": {
+  //     target: "http://localhost:3000",
+  //     pathRewrite: { "^/": "" },
+  //     changeOrigin: true
+  //   }
+  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
