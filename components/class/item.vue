@@ -4,17 +4,24 @@
       <div class="text-center">
         <img
           class="card-img-top gambar "
-          :src="img"
+          :src="foto"
           alt="Card image cap"
           width="100%"
           height="170px"
         />
       </div>
-
       <div class="card-body">
-        <h5 class="card-text text text-center">{{ name }}</h5>
+        <h5 class="card-text text text-center">{{ nama }}</h5>
       </div>
-      <class-modal :id="id" :img="img" :name="name" :desc="desc" />
+      <class-modal
+        :id="id"
+        :kode="kode"
+        :nama="nama"
+        :deskripsi="deskripsi"
+        :tanggalMulai="tanggalMulai"
+        :tanggalSelesai="tanggalSelesai"
+        :foto="foto"
+      />
     </div>
   </div>
 </template>
@@ -23,9 +30,12 @@
 export default {
   props: {
     id: { type: Number },
-    name: { type: String },
-    desc: { type: String },
-    img: { type: String }
+    kode: { type: String },
+    nama: { type: String },
+    deskripsi: { type: String },
+    tanggalMulai: { type: String },
+    tanggalSelesai: { type: String },
+    foto: { type: String }
   }
 };
 </script>
