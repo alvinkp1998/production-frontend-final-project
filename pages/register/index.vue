@@ -25,7 +25,7 @@
             <label class="btn btn-primary active">
               <input
                 type="radio"
-                name="options"
+                name="user"
                 id="option1"
                 autocomplete="off"
                 checked
@@ -35,38 +35,76 @@
             <label class="btn btn-primary">
               <input
                 type="radio"
-                name="options"
+                name="admin"
                 id="option2"
                 autocomplete="off"
               />
               Tutor
             </label>
           </div>
-          <form>
+          <form @submit.prevent="submitForm">
             <div class="mt-3">
               <div class="form-group">
-                <label for="email">Your Email</label>
-                <input type="email" class="form-control mb-2" />
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  :class="
+                    invalid
+                      ? `form-control is-invalid mb-2`
+                      : 'form-control mb-2'
+                  "
+                  placeholder="Your email address"
+                  v-model="email"
+                  required
+                />
+
+                <div class="invalid-feedback">
+                  Format email salah.
+                </div>
               </div>
               <div class="form-group">
-                <label for="firstname">First Name</label>
-                <input type="text" class="form-control" />
+                <label for="name">Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  :class="invalid ? `form-control is-invalid` : 'form-control'"
+                  placeholder="Your name"
+                  v-model="nama"
+                  required
+                />
+                <div class="invalid-feedback">
+                  Nama wajib diisi
+                </div>
               </div>
               <div class="form-group">
-                <label for="lastname">Last Name</label>
-                <input type="text" class="form-control" />
-              </div>
-              <div class="form-group">
-                <label for="createpassword">Create a password</label>
-                <input type="password" class="form-control" />
+                <label for="createPassword">Password</label>
+                <input
+                  id="createPassword"
+                  type="password"
+                  :class="invalid ? `form-control is-invalid` : 'form-control'"
+                  placeholder="Your password"
+                  v-model="password"
+                  required
+                />
+                <div class="invalid-feedback">
+                  Password wajib diisi
+                </div>
                 <small id="passwordHelpBlock" class="form-text text-muted">
                   Your password must be 8-20 characters long, contain letters
                   and numbers.
                 </small>
               </div>
               <div class="form-group">
-                <label for="createpassword">Confirm password</label>
-                <input type="password" class="form-control" />
+                <label for="createConfirmPassword">Confirm password</label>
+                <input
+                  id="createConfirmPassword"
+                  type="password"
+                  class="form-control"
+                  placeholder="Confirm password"
+                  v-model="passwordConfirm"
+                  required
+                />
               </div>
             </div>
             <div class="bottom mb-2">
@@ -88,7 +126,50 @@
 <script>
 export default {
   layout: "login",
-  auth: false
+  auth: false,
+  data() {
+    return {
+      email: "",
+      nama: "",
+      password: "",
+      passwordConfirm: "",
+      invalid: false
+    };
+  },
+  // TRIGGER INVALID BELUM//
+  methods: {
+    async submitForm() {
+      try {
+        let payload = {
+          email: this.email,
+          nama: this.nama,
+          password: this.password,
+          passwordConfirm: this.passwordConfirm
+        };
+
+        const response = await this.$axios.post("/register", payload);
+        console.log(response);
+        this.$swal({
+          icon: "success",
+          title: "Registrasi Berhasil",
+          timer: 3000
+        });
+
+        // await this.$auth.loginWith("local", {
+        //   data: {
+        //     email: this.email,
+        //     nama: this.nama,
+        //     password: this.password,
+        //     passwordConfirm: this.passwordConfirm
+        //   }
+        // });
+
+        this.$router.push("/login");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
 };
 </script>
 

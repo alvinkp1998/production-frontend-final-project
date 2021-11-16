@@ -37,10 +37,15 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-lg-6 text-center">
-                <img :src="img" :alt="namaKelas" width="400px" height="300px" />
+                <img
+                  :src="foto"
+                  :alt="namaKelas"
+                  width="400px"
+                  height="300px"
+                />
               </div>
               <div class="col-lg-6">
-                <h4>{{ name }}</h4>
+                <h4>{{ nama }} - {{ kode }}</h4>
                 <ul
                   class="nav nav-pills pt-2 mb-3"
                   id="pills-tab"
@@ -78,7 +83,7 @@
                     role="tabpanel"
                     aria-labelledby="pills-home-tab"
                   >
-                    <p class="mt-3 line-height">{{ desc }}</p>
+                    <p class="mt-3 line-height">{{ deskripsi }}</p>
                   </div>
                   <div
                     class="tab-pane fade"
@@ -90,11 +95,11 @@
                       <tbody>
                         <tr>
                           <td class="pb-2" width="80">Mulai :</td>
-                          <td class="pb-2">15 Agustus 2021</td>
+                          <td class="pb-2">{{ tanggalMulai }}</td>
                         </tr>
                         <tr>
                           <td>Selesai :</td>
-                          <td>27 November 2021</td>
+                          <td>{{ tanggalSelesai }}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -129,13 +134,17 @@
 export default {
   props: {
     id: { type: Number },
-    img: { type: String },
-    name: { type: String },
-    desc: { type: String }
+    kode: { type: String },
+    nama: { type: String },
+    deskripsi: { type: String },
+    tanggalMulai: { type: String },
+    tanggalSelesai: { type: String },
+    foto: { type: String }
   },
   computed: {
+    //nama kelas tanpa spasi
     namaKelas() {
-      return this.name.toLowerCase().replace(/ /g, "-");
+      return this.nama.toLowerCase().replace(/ /g, "-");
     }
   },
   methods: {

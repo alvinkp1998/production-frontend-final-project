@@ -12,30 +12,43 @@
       </div>
       <div class="col-md-6">
         <div class="container mt-5">
-          <form @submit.prevent="userLogin">
+          <form @submit.prevent="submitLogin">
             <div class="form-group">
+              <small
+                id="incorrect"
+                class="form-text text-muted red-text mb-3"
+                v-if="!incorrect"
+              >
+                Your email or password is incorrect.
+              </small>
               <label for="email">Email</label>
               <input
+                id="email"
                 type="email"
                 class="form-control mb-2"
                 placeholder="Masukkan email anda"
                 v-model="login.email"
+                required
               />
             </div>
             <div class="form-group">
               <label for="password">Password</label>
               <div class="input-group">
                 <input
+                  id="password"
                   :type="showPassword ? 'password' : 'text'"
                   class="form-control"
                   placeholder="Masukkan password"
                   v-model="login.password"
+                  required
                 />
-                <div class="input-group-append">
-                  <i
-                    :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
-                    @click="showPassword = !showPassword"
-                  ></i>
+                <div class="input-group-append eye">
+                  <span class="input-group-text bg-white"
+                    ><i
+                      :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
+                      @click="showPassword = !showPassword"
+                    ></i
+                  ></span>
                 </div>
               </div>
             </div>
@@ -74,23 +87,28 @@ export default {
         email: "",
         password: ""
       },
-      showPassword: true
+      showPassword: true,
+      incorrect: true
     };
   },
   methods: {
-    async userLogin() {
+    async submitLogin() {
       try {
         let response = await this.$auth.loginWith("local", {
           data: this.login
         });
         console.log(response);
-        this.$swal({
-          icon: "success",
-          title: "Selamat Datang",
-          text: "Kamu berhasil login",
-          timer: 2000
-        });
-        this.$router.push("/");
+        if (this.$auth.user) {
+          this.$swal({
+            icon: "success",
+            title: `Hi, Selamat Datang ${this.$auth.user.nama}`,
+            text: "Kamu berhasil login",
+            timer: 3000
+          });
+          this.$router.push("/");
+        } else {
+          this.incorrect = false;
+        }
       } catch (err) {
         console.log(err);
       }
@@ -114,5 +132,11 @@ export default {
 .left {
   background-color: #6750c0;
   background-image: linear-gradient(316deg, #7059c9 0%, #7b47b3 74%);
+}
+.red-text {
+  color: red !important;
+}
+.bg-white {
+  background-color: white;
 }
 </style>

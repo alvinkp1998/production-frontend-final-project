@@ -52,7 +52,7 @@
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item nav-profile dropdown">
+          <li class="nav-item nav-profile dropdown" v-if="$auth.user">
             <a
               class="nav-link dropdown-toggle"
               id="profileDropdown"
@@ -65,7 +65,7 @@
                 <span class="availability-status online"></span>
               </div>
               <div class="nav-profile-text">
-                <p class="mb-1 text-black">Alvin Kusuma</p>
+                <p class="mb-1 text-black">{{ $auth.user.nama }}</p>
               </div>
             </a>
             <div
@@ -88,17 +88,17 @@
               <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
             </a>
           </li>
-          <!-- <li class="nav-item">
+          <li class="nav-item" v-if="!$auth.user">
             <button class="btn btn-primary btn-sm" @click="toLogin">
               Login
             </button>
           </li>
-          <li class="nav-item ml-2">
+          <li class="nav-item ml-2" v-if="!$auth.user" s>
             <button class="btn btn-primary btn-sm" @click="toRegister">
               Sign up
             </button>
-          </li> -->
-          <li class="nav-item dropdown">
+          </li>
+          <li class="nav-item dropdown" v-if="$auth.user">
             <a
               class="nav-link count-indicator dropdown-toggle"
               id="messageDropdown"
@@ -178,8 +178,7 @@
               <h6 class="p-3 mb-0 text-center">4 new messages</h6>
             </div>
           </li>
-
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" v-if="$auth.user">
             <a
               class="nav-link count-indicator dropdown-toggle"
               id="notificationDropdown"
@@ -252,25 +251,16 @@
               <h6 class="p-3 mb-0 text-center">See all notifications</h6>
             </div>
           </li>
-          <!-- 
-          <li class="nav-item nav-logout d-none d-lg-block">
+          <li
+            class="nav-item nav-logout d-none d-lg-block"
+            v-if="$auth.user"
+            @click="logout"
+          >
             <a class="nav-link" href="#">
               <i class="mdi mdi-power"></i>
             </a>
           </li>
-          <li class="nav-item nav-settings d-none d-lg-block">
-            <a class="nav-link" href="#">
-              <i class="mdi mdi-format-line-spacing"></i>
-            </a>
-          </li> -->
         </ul>
-        <button
-          class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
-          type="button"
-          data-toggle="offcanvas"
-        >
-          <span class="mdi mdi-menu"></span>
-        </button>
       </div>
     </nav>
   </div>

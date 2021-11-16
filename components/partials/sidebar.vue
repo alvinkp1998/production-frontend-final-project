@@ -2,14 +2,14 @@
   <div>
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
       <ul class="nav">
-        <li class="nav-item nav-profile">
+        <li class="nav-item nav-profile" v-if="$auth.user">
           <a href="#" class="nav-link">
             <div class="nav-profile-image">
               <img src="images/fotoku.jpg" alt="profile" />
               <span class="login-status online"></span>
             </div>
             <div class="nav-profile-text d-flex flex-column">
-              <span class="font-weight-bold mb-2">Alvin Kusuma</span>
+              <span class="font-weight-bold mb-2">{{ $auth.user.nama }}</span>
               <span class="text-secondary text-small">Student</span>
             </div>
             <i
@@ -33,6 +33,11 @@ export default {
   data() {
     return {
       listSidebar: [
+        {
+          name: "Home",
+          icon: "fas fa-home menu-icon",
+          to: "/"
+        },
         {
           name: "Semua Kelas",
           icon: "fas fa-chalkboard menu-icon",
