@@ -109,9 +109,11 @@ export default {
           text: "Kelas berhasil ditambah",
           timer: "2000"
         });
-
         $(".modal").modal("hide");
-        this.$router.push("/list-class");
+        this.$emit("refreshData");
+
+        // Belum untuk hapus inoutan saat ingin memasukkan kembali datanya
+        console.log(payload);
       } catch (error) {
         this.$swal({
           icon: "danger",

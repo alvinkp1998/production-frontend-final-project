@@ -105,6 +105,13 @@
                   v-model="passwordConfirm"
                   required
                 />
+                <small
+                  id="passwordHelpBlock"
+                  class="form-text text-muted red-text"
+                  v-if="passConfirm"
+                >
+                  Password tidak cocok, periksa ulang kembali password anda
+                </small>
               </div>
             </div>
             <div class="bottom mb-2">
@@ -133,6 +140,8 @@ export default {
       nama: "",
       password: "",
       passwordConfirm: "",
+      status: "user",
+      passConfirm: false,
       invalid: false
     };
   },
@@ -144,27 +153,22 @@ export default {
           email: this.email,
           nama: this.nama,
           password: this.password,
-          passwordConfirm: this.passwordConfirm
+          passwordConfirm: this.passwordConfirm,
+          status: this.status
         };
 
-        const response = await this.$axios.post("/register", payload);
-        console.log(response);
-        this.$swal({
-          icon: "success",
-          title: "Registrasi Berhasil",
-          timer: 3000
-        });
-
-        // await this.$auth.loginWith("local", {
-        //   data: {
-        //     email: this.email,
-        //     nama: this.nama,
-        //     password: this.password,
-        //     passwordConfirm: this.passwordConfirm
-        //   }
-        // });
-
-        this.$router.push("/login");
+        if (payload.password !== payload.passwordConfirm) {
+          this.passConfirm = true;
+        } else {
+          const response = await this.$axios.post("/register", payload);
+          console.log(response);
+          this.$swal({
+            icon: "success",
+            title: "Registrasi Berhasil",
+            timer: 3000
+          });
+          this.$router.push("/login");
+        }
       } catch (error) {
         console.log(error);
       }
@@ -184,7 +188,6 @@ export default {
   margin: auto;
   height: 70vh;
 }
-
 .left {
   background-color: #6750c0;
   background-image: linear-gradient(316deg, #7059c9 0%, #7b47b3 74%);
@@ -195,5 +198,8 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
+}
+.red-text {
+  color: red !important;
 }
 </style>

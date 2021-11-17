@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="box">
-      <h3 class="center text-white display-4">
+    <div class="box bg">
+      <h3 class="center text-black display-4">
         <span class="font-bigger">Start learning from the best tutors</span>
         <nuxt-link to="/list-class"
-          ><h5 class="text-white text-underline pt-3">
+          ><h5 class="text-black text-underline pt-3">
             Explore all classes
           </h5></nuxt-link
         >
@@ -16,8 +16,6 @@
 <style scoped>
 .box {
   border-radius: 30px;
-  background-color: #923cb5;
-  background-image: linear-gradient(147deg, #424142 0%, #6b3f75 74%);
   display: flex;
   height: 30vh;
 }

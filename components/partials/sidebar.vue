@@ -10,11 +10,10 @@
             </div>
             <div class="nav-profile-text d-flex flex-column">
               <span class="font-weight-bold mb-2">{{ $auth.user.nama }}</span>
-              <span class="text-secondary text-small">Student</span>
+              <span class="text-secondary text-small font-weight-boldgit "
+                >Student</span
+              >
             </div>
-            <i
-              class="mdi mdi-bookmark-check text-success nav-profile-badge"
-            ></i>
           </a>
         </li>
         <li class="nav-item" v-for="(menu, i) in listSidebar" :key="i">
@@ -40,18 +39,18 @@ export default {
         },
         {
           name: "Semua Kelas",
-          icon: "fas fa-chalkboard menu-icon",
+          icon: "fas fa-book-open menu-icon",
           to: "/list-class"
         },
         {
           name: "Kelasku",
-          icon: "fas fa-book-open menu-icon",
+          icon: "fas fa-book-reader menu-icon",
           to: "/kelasku"
         },
         {
           name: "Presensi",
-          icon: "far fa-check-square menu-icon",
-          to: "/list-class"
+          icon: "fas fa-check-square menu-icon",
+          to: ""
         }
       ]
     };

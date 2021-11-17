@@ -152,7 +152,7 @@ export default {
       $(".modal").modal("hide");
       this.$router.push(`${this.namaKelas}/kelas`);
     },
-    confirmGabung() {
+    async confirmGabung() {
       this.$swal({
         title: "Apakah kamu yakin?",
         text: `Ingin bergabung dengan kelas ${this.namaKelas}.`,
@@ -163,6 +163,7 @@ export default {
         confirmButtonText: "Ya, bergabung"
       }).then(result => {
         if (result.isConfirmed) {
+          const data = this.$axios.post("/join");
           this.$swal(
             "Berhasil!",
             `Kamu berhasil bergabung dengan kelas ${this.namaKelas}.`,
