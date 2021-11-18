@@ -148,10 +148,6 @@ export default {
     }
   },
   methods: {
-    redirectClass() {
-      $(".modal").modal("hide");
-      this.$router.push(`${this.namaKelas}/kelas`);
-    },
     async confirmGabung() {
       this.$swal({
         title: "Apakah kamu yakin?",
@@ -163,7 +159,11 @@ export default {
         confirmButtonText: "Ya, bergabung"
       }).then(result => {
         if (result.isConfirmed) {
-          const data = this.$axios.post("/join");
+          const payload = {
+            kelasId: this.id
+          };
+          const JOIN_KELAS = this.$axios.$post("/join", payload);
+          console.log(JOIN_KELAS);
           this.$swal(
             "Berhasil!",
             `Kamu berhasil bergabung dengan kelas ${this.namaKelas}.`,

@@ -1,6 +1,12 @@
 <template>
   <div>
     <div class="card shadow-lg">
+      <div v-if="$auth.loggedIn && $auth.user.status == 'admin'">
+        <span class="text-right bigger-text float-right" @click="confirmDelete"
+          >&times;</span
+        >
+      </div>
+
       <div class="text-center">
         <img
           class="card-img-top gambar "
@@ -27,7 +33,9 @@
 </template>
 
 <script>
+import request from "../../mixins/request.vue";
 export default {
+  mixins: [request],
   props: {
     id: { type: Number },
     kode: { type: String },
@@ -36,6 +44,15 @@ export default {
     tanggalMulai: { type: String },
     tanggalSelesai: { type: String },
     foto: { type: String }
+  },
+  methods: {
+    async confirmDelete() {
+      const confirm = await this.confirm("Menghapus kelas " + this.nama);
+      if (confirm.isConfirmed) {
+        await this.requestDelete("/kelas/" + this.id);
+        this.$emit("refreshData");
+      }
+    }
   }
 };
 </script>
@@ -50,6 +67,12 @@ export default {
 
 .gambar {
   max-width: 300px;
+}
+
+.bigger-text {
+  width: 100%;
+  cursor: pointer;
+  font-size: 26px;
 }
 
 /* // Small devices (landscape phones, 576px and up) */

@@ -36,10 +36,15 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-lg-6 text-center">
-                <img :src="img" :alt="namaKelas" width="400px" height="300px" />
+                <img
+                  :src="foto"
+                  :alt="namaKelas"
+                  width="400px"
+                  height="300px"
+                />
               </div>
               <div class="col-lg-6">
-                <h4>{{ name }}</h4>
+                <h4>{{ nama }}</h4>
                 <ul
                   class="nav nav-pills pt-2 mb-3"
                   id="pills-tab"
@@ -77,7 +82,7 @@
                     role="tabpanel"
                     aria-labelledby="pills-home-tab"
                   >
-                    <p class="mt-3 line-height">{{ desc }}</p>
+                    <p class="mt-3 line-height">{{ deskripsi }}</p>
                   </div>
                   <div
                     class="tab-pane fade"
@@ -125,41 +130,35 @@
 </template>
 
 <script>
+import request from "../../mixins/request.vue";
 export default {
+  mixins: [request],
   props: {
     id: { type: Number },
-    img: { type: String },
-    name: { type: String },
-    desc: { type: String }
+    kode: { type: String },
+    nama: { type: String },
+    deskripsi: { type: String },
+    tanggalMulai: { type: String },
+    tanggalSelesai: { type: String },
+    foto: { type: String }
   },
   computed: {
+    //nama kelas tanpa spasi
     namaKelas() {
-      return this.name.toLowerCase().replace(/ /g, "-");
+      return this.nama.toLowerCase().replace(/ /g, "-");
     }
   },
   methods: {
     redirectClass() {
       $(".modal").modal("hide");
-      this.$router.push(`${this.namaKelas}/kelas`);
+      this.$router.push(`${this.namaKelas}`);
     },
-    leaveClass() {
-      this.$swal({
-        title: "Apakah kamu yakin?",
-        text: `Ingin keluar dari kelas ${this.namaKelas}`,
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yakin"
-      }).then(result => {
-        if (result.isConfirmed) {
-          this.$swal(
-            "Berhasil!",
-            `Kamu berhasil keluar dari kelas ${this.namaKelas}.`,
-            "success"
-          );
-        }
-      });
+    async leaveClass() {
+      const confirm = await this.confirm("Keluar dari kelas " + this.nama);
+      if (confirm.isConfirmed) {
+        await this.requestDelete("/join/" + this.id);
+        this.$emit("refreshData");
+      }
     }
   }
 };

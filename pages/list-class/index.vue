@@ -7,6 +7,7 @@
         :key="item.id"
       >
         <class-item
+          @refreshData="GET_LIST_CLASS"
           :id="item.id"
           :kode="item.kodeKelas"
           :nama="item.namaKelas"

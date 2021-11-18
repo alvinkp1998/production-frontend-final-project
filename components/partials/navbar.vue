@@ -34,13 +34,13 @@
           style="margin-left:300px"
         >
           <li class="nav-item border-right border-left ">
-            <nuxt-link class="nav-link" :to="`/${$route.params.classId}/kelas`"
+            <nuxt-link class="nav-link" :to="`/${$route.params.classId}`"
               >Kelas</nuxt-link
             >
           </li>
           <li class="nav-item border-right">
             <nuxt-link class="nav-link" :to="`/${$route.params.classId}/jadwal`"
-              >Jadwal</nuxt-link
+              >Sesi</nuxt-link
             >
           </li>
           <li class="nav-item border-right">
