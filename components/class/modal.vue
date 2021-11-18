@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="d-flex justify-content-around align-items-center flex-wrap">
+    <div
+      class="d-flex justify-content-around align-items-center flex-wrap"
+      v-if="$auth.user.status == 'user'"
+    >
       <a
         type="button"
         class="btn btn-secondary pill btn-sm mt-1 arrow"
@@ -12,6 +15,18 @@
       <button @click="confirmGabung" class="btn btn-primary btn-sm pill arrow">
         <span>Gabung kelas</span>
       </button>
+    </div>
+    <div class="float-right">
+      <items-buttonEdit
+        :id="id"
+        :kode="kode"
+        :nama="nama"
+        :deskripsi="deskripsi"
+        :tanggalMulai="tanggalMulai"
+        :tanggalSelesai="tanggalSelesai"
+        :foto="foto"
+        v-if="$auth.loggedIn && $auth.user.status == 'admin'"
+      />
     </div>
 
     <div
@@ -160,7 +175,7 @@ export default {
       }).then(result => {
         if (result.isConfirmed) {
           const payload = {
-            kelasId: this.id
+            classId: this.id
           };
           const JOIN_KELAS = this.$axios.$post("/join", payload);
           console.log(JOIN_KELAS);

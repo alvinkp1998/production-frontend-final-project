@@ -8,7 +8,7 @@
       >
         <kelasku-item
           @refreshData="GET_LIST_CLASS"
-          :id="item.id"
+          :id="item.Class.id"
           :kode="item.Class.kodeKelas"
           :nama="item.Class.namaKelas"
           :deskripsi="item.Class.deskripsiKelas"

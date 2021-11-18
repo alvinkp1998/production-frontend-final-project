@@ -6,30 +6,41 @@
       </div>
     </div>
 
-    <div class="container materi">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-1 mr-4">
-              <img src="/favicon.ico" width="40px" height="100%" alt="materi" />
-            </div>
-            <div class="col vertical-line">
-              {{ $route.params }}
-              <h4>{{ listSesi.namaSesi }} - Materi</h4>
-              <h5>30 Agustus 2021</h5>
-            </div>
-            <div class="col-1 d-flex align-items-center ">
-              <i
-                class="fas fa-ellipsis-v"
-                data-toggle="dropdown"
-                style="font-size:1.4em"
-              ></i>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Sunting</a>
-                <a class="dropdown-item" href="#">Hapus</a>
-              </div>
+    <div class="container materi mb-4" v-for="item in listSesi" :key="item.id">
+      <div class="row shadow-sm">
+        <div
+          class="box pt-3 pb-3"
+          :class="muncul ? 'background-purple shadow-sm' : 'background-white'"
+          @click="muncul = !muncul"
+        >
+          <div class="col-1 mr-4">
+            <img
+              src="/images/materi.jpg"
+              width="50px"
+              height="100%"
+              alt="materi"
+            />
+          </div>
+          <div class="col">
+            <h4>{{ item.namaSesi }}</h4>
+            <h5>{{ item.waktuMulai }}</h5>
+          </div>
+          <div class="col-1 d-flex align-items-center ">
+            <i
+              class="fas fa-ellipsis-v"
+              data-toggle="dropdown"
+              style="font-size:1.4em"
+            ></i>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Sunting</a>
+              <a class="dropdown-item" href="#">Hapus</a>
             </div>
           </div>
+        </div>
+        <div class="box2" v-if="muncul">
+          <nuxt-link :to="`/${$route.params.classId}/materi`"
+            ><span class="view-materi">View Material</span></nuxt-link
+          >
         </div>
       </div>
     </div>
@@ -43,7 +54,8 @@ export default {
   data() {
     return {
       listSesi: [],
-      listMateri: []
+      listMateri: [],
+      muncul: false
     };
   },
   computed: {
@@ -54,18 +66,26 @@ export default {
   methods: {
     async GET_LIST_SESI() {
       const LIST_SESI = await this.requestGet("/sesi");
+      const LIST_MATERI = await this.requestGet("/materi");
       console.log(LIST_SESI);
-      // this.listSesi = LIST_SESI.data;
+      console.log(LIST_MATERI);
+
+      this.listSesi = LIST_SESI.data;
+      this.listMateri = LIST_MATERI.data;
     },
     async GET_LIST_MATERI() {
       const LIST_MATERI = await this.requestGet("/materi");
       console.log(LIST_MATERI);
-      // this.listClass = LIST_CLASS.data;
+
+      this.listMateri = LIST_MATERI.data;
+    },
+    toMateri() {
+      // this.$router.push(`/$routes.params.classId/materi`);
     }
   },
   mounted() {
-    this.GET_LIST_SESI;
-    this.GET_LIST_MATERI;
+    this.GET_LIST_SESI();
+    // this.GET_LIST_MATERI();
   }
 };
 </script>
@@ -84,20 +104,56 @@ export default {
   height: 100%;
 }
 .container.materi {
+  display: flex;
+  justify-content: center;
   width: 700px;
 }
 .display-4 {
   margin: auto;
 }
-.card {
-  border-radius: 15px !important;
-  background-color: rgb(245, 240, 240);
-  width: 100%;
+.background-purple {
+  background-color: #cdc1ff;
+  background-image: linear-gradient(316deg, #cdc1ff 0%, #e5d9f2 74%);
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
-.vertical-line {
-  margin-left: 20px;
-  padding-left: 20px;
-  border-left: 3px solid rgb(168, 167, 167);
+.background-white {
+  background-color: white;
+}
+.box {
+  /* background-color: rgb(237, 212, 243); */
+  display: flex;
+  justify-content: center;
+  width: 800px;
+  border-radius: 30px;
+}
+.box:hover {
+  cursor: pointer;
+  background-color: #cdc1ff;
+  background-image: linear-gradient(316deg, #cdc1ff 0%, #e5d9f2 74%);
+}
+.box2 {
+  position: relative;
+  width: 800px;
+  height: 300px;
+  /* background-color: blue; */
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+.view-materi {
+  position: absolute;
+  font-weight: bold;
+  font-size: 20px;
+  color: #b3a3f1;
+  padding: 10px;
+  bottom: 0;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+.view-materi:hover {
+  cursor: pointer;
+  background-color: #f6f4fd;
+  padding: 10px;
 }
 
 .pointer {

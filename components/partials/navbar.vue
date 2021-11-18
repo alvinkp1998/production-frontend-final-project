@@ -38,11 +38,11 @@
               >Kelas</nuxt-link
             >
           </li>
-          <li class="nav-item border-right">
+          <!-- <li class="nav-item border-right">
             <nuxt-link class="nav-link" :to="`/${$route.params.classId}/jadwal`"
               >Sesi</nuxt-link
             >
-          </li>
+          </li> -->
           <li class="nav-item border-right">
             <nuxt-link
               class="nav-link"
