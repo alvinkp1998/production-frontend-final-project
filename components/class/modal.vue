@@ -2,7 +2,7 @@
   <div>
     <div
       class="d-flex justify-content-around align-items-center flex-wrap"
-      v-if="$auth.user.status == 'user'"
+      v-if="!$auth.loggedIn || $auth.user.status == 'user'"
     >
       <a
         type="button"
@@ -164,28 +164,44 @@ export default {
   },
   methods: {
     async confirmGabung() {
-      this.$swal({
-        title: "Apakah kamu yakin?",
-        text: `Ingin bergabung dengan kelas ${this.namaKelas}.`,
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Ya, bergabung"
-      }).then(result => {
-        if (result.isConfirmed) {
-          const payload = {
-            classId: this.id
-          };
-          const JOIN_KELAS = this.$axios.$post("/join", payload);
-          console.log(JOIN_KELAS);
-          this.$swal(
-            "Berhasil!",
-            `Kamu berhasil bergabung dengan kelas ${this.namaKelas}.`,
-            "success"
-          );
+      try {
+        if (this.$auth.loggedIn) {
+          const yakin = await this.$swal({
+            title: "Apakah kamu yakin?",
+            text: `Ingin bergabung dengan kelas ${this.namaKelas}.`,
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya, bergabung"
+          });
+          if (yakin.isConfirmed) {
+            const payload = {
+              classId: this.id
+            };
+            const JOIN_KELAS = await this.$axios.$post("/join", payload);
+            console.log(JOIN_KELAS);
+            this.$swal(
+              "Berhasil!",
+              `Kamu berhasil bergabung dengan kelas ${this.namaKelas}.`,
+              "success"
+            );
+          }
+        } else {
+          await this.$swal({
+            icon: "warning",
+            title: "Tidak bisa bergabung ke kelas",
+            text: "Anda harus login terlebih dahulu"
+          });
+          this.$router.push("/login");
         }
-      });
+      } catch (error) {
+        this.$swal({
+          icon: "warning",
+          title: "Gagal",
+          text: `Anda sudah bergabung dengan kelas ${this.namaKelas}`
+        });
+      }
     }
   }
 };

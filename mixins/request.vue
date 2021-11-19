@@ -9,18 +9,6 @@ export default {
         showCancelButton: true
       });
     },
-    async requestPost(url) {
-      try {
-        const data = await this.$axios.$post(url);
-        return data;
-      } catch (error) {
-        this.$swal({
-          icon: "warning",
-          title: "Gagal menambahkan data!",
-          text: error.toString()
-        });
-      }
-    },
     async requestGet(url) {
       try {
         const data = await this.$axios.$get(url);
@@ -39,7 +27,7 @@ export default {
         this.$swal({
           icon: "success",
           title: "Sukses",
-          text: "Data berhasil dihapus"
+          text: "Data berhasil dihapus!"
         });
         return data;
       } catch (error) {

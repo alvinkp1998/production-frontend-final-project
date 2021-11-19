@@ -54,9 +54,9 @@
             </div>
 
             <div class="mt-4 ">
-              <a href="/belom">
+              <!-- <a href="/belom">
                 Forgot password?
-              </a>
+              </a> -->
               <button
                 type="submit"
                 class="submit btn btn-primary btn-block"

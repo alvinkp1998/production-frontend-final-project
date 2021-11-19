@@ -1,10 +1,10 @@
 <template>
   <div>
+    <div class="container">
+      <h1 class="display-4 mb-3">Sesi {{ $route.params.sessionId }}</h1>
+    </div>
     <div v-for="item in listMateri" :key="item.id">
       <div class=" jumbotron-fluid mt-3 mb-5">
-        <div class="container">
-          <h1 class="display-4 mb-3">Sesi {{ item.SessionId }}</h1>
-        </div>
         <div class="container materi mb-5">
           <div class="row shadow-sm">
             <div class="box pt-3 pb-3">
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import request from "../../../mixins/request.vue";
+import request from "../../../../../mixins/request.vue";
 export default {
   mixins: [request],
   data() {
@@ -39,10 +39,11 @@ export default {
   },
   methods: {
     async GET_LIST_MATERI() {
-      const LIST_MATERI = await this.requestGet("/materi");
+      const LIST_MATERI = await this.requestGet(
+        `/materi/${this.$route.params.sessionId}`
+      );
       console.log(LIST_MATERI);
-
-      this.listMateri = LIST_MATERI.data;
+      this.listMateri = LIST_MATERI;
     }
   },
   mounted() {

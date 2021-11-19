@@ -7,9 +7,9 @@
     </div>
 
     <div class="container materi mb-4" v-for="item in listSesi" :key="item.id">
-      <div class="row shadow-sm">
+      <div class="row">
         <div
-          class="box pt-3 pb-3"
+          class="box shadow-sm pt-3 pb-3 mb-3"
           :class="muncul ? 'background-purple shadow-sm' : 'background-white'"
           @click="muncul = !muncul"
         >
@@ -22,10 +22,11 @@
             />
           </div>
           <div class="col">
-            <h4>{{ item.namaSesi }}</h4>
+            <h4>Sesi {{ item.urutanSesi }} - {{ item.namaSesi }}</h4>
             <h5>{{ item.waktuMulai }}</h5>
           </div>
-          <div class="col-1 d-flex align-items-center ">
+
+          <!-- <div class="col-1 d-flex align-items-center ">
             <i
               class="fas fa-ellipsis-v"
               data-toggle="dropdown"
@@ -35,12 +36,19 @@
               <a class="dropdown-item" href="#">Sunting</a>
               <a class="dropdown-item" href="#">Hapus</a>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="box2" v-if="muncul">
-          <nuxt-link :to="`/${$route.params.classId}/materi`"
-            ><span class="view-materi">View Material</span></nuxt-link
+          <button
+            class="view-materi"
+            @click="
+              $router.push(
+                `/kelasku/${$route.params.namaKelas}/${$route.params.classId}/materi/${item.id}`
+              )
+            "
           >
+            View Material
+          </button>
         </div>
       </div>
     </div>
@@ -48,40 +56,45 @@
 </template>
 
 <script>
-import request from "../../mixins/request.vue";
+import request from "../../../../mixins/request.vue";
 export default {
   mixins: [request],
   data() {
     return {
       listSesi: [],
-      listMateri: [],
+      // listMateri: [],
       muncul: false
     };
   },
   computed: {
     forTitle() {
-      return this.$route.params.classId.toUpperCase().replace(/-/g, " ");
+      return this.$route.params.namaKelas.toUpperCase().replace(/-/g, " ");
     }
   },
   methods: {
     async GET_LIST_SESI() {
-      const LIST_SESI = await this.requestGet("/sesi");
-      const LIST_MATERI = await this.requestGet("/materi");
+      const LIST_SESI = await this.requestGet(
+        `/sesi/${this.$route.params.classId}`
+      );
+      // const LIST_MATERI = await this.requestGet("/materi");
       console.log(LIST_SESI);
-      console.log(LIST_MATERI);
+      // console.log(LIST_MATERI);
 
       this.listSesi = LIST_SESI.data;
-      this.listMateri = LIST_MATERI.data;
+      // this.listMateri = LIST_MATERI.data;
+      console.log(this.listSesi);
     },
-    async GET_LIST_MATERI() {
-      const LIST_MATERI = await this.requestGet("/materi");
-      console.log(LIST_MATERI);
-
-      this.listMateri = LIST_MATERI.data;
-    },
-    toMateri() {
-      // this.$router.push(`/$routes.params.classId/materi`);
+    toMaterial() {
+      this.$router.push(
+        `/kelasku/${$route.params.namaKelas}/${this.$route.params.classId}/${this.item.id}`
+      );
     }
+    // async GET_LIST_MATERI() {
+    //   const LIST_MATERI = await this.requestGet("/materi");
+    //   console.log(LIST_MATERI);
+
+    //   this.listMateri = LIST_MATERI.data;
+    // },
   },
   mounted() {
     this.GET_LIST_SESI();
@@ -142,9 +155,13 @@ export default {
 }
 .view-materi {
   position: absolute;
+  border: none;
+  background-color: white;
+  border-radius: 40px;
+  transition: 0.3s ease-in-out;
   font-weight: bold;
   font-size: 20px;
-  color: #b3a3f1;
+  color: #ae9bfc;
   padding: 10px;
   bottom: 0;
   margin-left: 15px;

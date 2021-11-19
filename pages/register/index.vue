@@ -20,7 +20,7 @@
       </div>
       <div class="col-md-6">
         <div class="container mt-5">
-          <p>Join Fullstack Academy as a</p>
+          <!-- <p>Join Fullstack Academy as a</p>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-primary active">
               <input
@@ -41,7 +41,7 @@
               />
               Tutor
             </label>
-          </div>
+          </div> -->
           <form @submit.prevent="submitForm">
             <div class="mt-3">
               <div class="form-group">

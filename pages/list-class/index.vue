@@ -17,7 +17,6 @@
           :foto="item.fotoKelas"
         />
       </div>
-
       <items-buttonCreate
         @refreshData="GET_LIST_CLASS"
         v-if="$auth.loggedIn && $auth.user.status == 'admin'"

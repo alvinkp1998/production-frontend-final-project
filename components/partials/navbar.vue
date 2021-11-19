@@ -29,24 +29,30 @@
           </form>
         </div>
         <ul
-          v-if="$route.params.classId"
+          v-if="$route.params.namaKelas"
           class="navbar-nav text-black"
           style="margin-left:300px"
         >
           <li class="nav-item border-right border-left ">
-            <nuxt-link class="nav-link" :to="`/${$route.params.classId}`"
+            <nuxt-link
+              class="nav-link"
+              :to="
+                `/kelasku/${$route.params.namaKelas}/${$route.params.classId}`
+              "
               >Kelas</nuxt-link
             >
           </li>
           <!-- <li class="nav-item border-right">
-            <nuxt-link class="nav-link" :to="`/${$route.params.classId}/jadwal`"
+            <nuxt-link class="nav-link" :to="`/kelasku/${$route.params.classId}/jadwal`"
               >Sesi</nuxt-link
             >
           </li> -->
           <li class="nav-item border-right">
             <nuxt-link
               class="nav-link"
-              :to="`/${$route.params.classId}/anggota`"
+              :to="
+                `/kelasku/${$route.params.namaKelas}/${$route.params.classId}/anggota`
+              "
               >Anggota</nuxt-link
             >
           </li>

@@ -22,7 +22,7 @@
                 Fullstack Academy
                 <span
                   style="text-transform: capitalize"
-                  v-if="$route.params.classId"
+                  v-if="$route.params.namaKelas"
                   >{{ "/ " + forTitle }}</span
                 >
               </h3>
@@ -49,7 +49,7 @@
 export default {
   computed: {
     forTitle() {
-      return this.$route.params.classId.replace(/-/g, " ");
+      return this.$route.params.namaKelas.replace(/-/g, " ");
     }
   }
 };

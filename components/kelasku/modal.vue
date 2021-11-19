@@ -151,7 +151,7 @@ export default {
   methods: {
     redirectClass() {
       $(".modal").modal("hide");
-      this.$router.push(`${this.namaKelas}`);
+      this.$router.push(`/kelasku/${this.namaKelas}/${this.id}`);
     },
     async leaveClass() {
       const confirm = await this.confirm("Keluar dari kelas " + this.nama);
