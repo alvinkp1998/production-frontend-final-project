@@ -4,7 +4,7 @@ export default {
     confirm(message) {
       return this.$swal({
         icon: "question",
-        title: "Are you sure?",
+        title: "Apakah kamu yakin?",
         text: message,
         showCancelButton: true
       });

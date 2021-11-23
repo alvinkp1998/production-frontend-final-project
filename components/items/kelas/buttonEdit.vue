@@ -5,7 +5,7 @@
       class="btn btn-primary btn-sm pill"
       type="button"
       data-toggle="modal"
-      data-target="#modalCreate"
+      data-target="#modalEdit"
     >
       Edit Kelas
     </button>
@@ -13,7 +13,7 @@
     <!-- Modal -->
     <div
       class="modal fade"
-      id="modalCreate"
+      id="modalEdit"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalCenterTitle"

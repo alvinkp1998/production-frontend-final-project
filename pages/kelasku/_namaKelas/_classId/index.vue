@@ -10,8 +10,8 @@
       <div class="row">
         <div
           class="box shadow-sm pt-3 pb-3 mb-3"
-          :class="muncul ? 'background-purple shadow-sm' : 'background-white'"
-          @click="muncul = !muncul"
+          data-toggle="collapse"
+          :data-target="`#${item.id}`"
         >
           <div class="col-1 mr-4">
             <img
@@ -26,19 +26,25 @@
             <h5>{{ item.waktuMulai }}</h5>
           </div>
 
-          <!-- <div class="col-1 d-flex align-items-center ">
-            <i
-              class="fas fa-ellipsis-v"
-              data-toggle="dropdown"
-              style="font-size:1.4em"
-            ></i>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Sunting</a>
-              <a class="dropdown-item" href="#">Hapus</a>
-            </div>
-          </div> -->
+          <items-sesi-buttonEdit
+            :id="item.id"
+            :namaSesi="item.namaSesi"
+            :urutanSesi="item.urutanSesi"
+            :waktuMulai="item.waktuMulai"
+            :waktuSelesai="item.waktuSelesai"
+            v-if="$auth.loggedIn && $auth.user.status == 'admin'"
+            @refreshData="GET_LIST_SESI"
+          />
+          <div v-if="$auth.loggedIn && $auth.user.status == 'admin'">
+            <button
+              class="btn btn-danger btn-sm pill mt-3"
+              @click="deleteSesi(item.id, item.namaSesi)"
+            >
+              Hapus
+            </button>
+          </div>
         </div>
-        <div class="box2" v-if="muncul">
+        <div class="box-material collapse shadow " :id="item.id">
           <button
             class="view-materi"
             @click="
@@ -52,6 +58,10 @@
         </div>
       </div>
     </div>
+    <items-sesi-buttonCreate
+      @refreshData="GET_LIST_SESI"
+      v-if="$auth.loggedIn && $auth.user.status == 'admin'"
+    />
   </div>
 </template>
 
@@ -62,7 +72,6 @@ export default {
   data() {
     return {
       listSesi: [],
-      // listMateri: [],
       muncul: false
     };
   },
@@ -76,29 +85,27 @@ export default {
       const LIST_SESI = await this.requestGet(
         `/sesi/${this.$route.params.classId}`
       );
-      // const LIST_MATERI = await this.requestGet("/materi");
       console.log(LIST_SESI);
-      // console.log(LIST_MATERI);
 
       this.listSesi = LIST_SESI.data;
-      // this.listMateri = LIST_MATERI.data;
       console.log(this.listSesi);
     },
     toMaterial() {
       this.$router.push(
         `/kelasku/${$route.params.namaKelas}/${this.$route.params.classId}/${this.item.id}`
       );
-    }
-    // async GET_LIST_MATERI() {
-    //   const LIST_MATERI = await this.requestGet("/materi");
-    //   console.log(LIST_MATERI);
+    },
 
-    //   this.listMateri = LIST_MATERI.data;
-    // },
+    async deleteSesi(id, nama) {
+      const confirm = await this.confirm(`Menghapus Sesi ${nama}`);
+      if (confirm.isConfirmed) {
+        await this.requestDelete(`/sesi/${id}`);
+        this.GET_LIST_SESI();
+      }
+    }
   },
   mounted() {
     this.GET_LIST_SESI();
-    // this.GET_LIST_MATERI();
   }
 };
 </script>
@@ -145,13 +152,12 @@ export default {
   background-color: #cdc1ff;
   background-image: linear-gradient(316deg, #cdc1ff 0%, #e5d9f2 74%);
 }
-.box2 {
+.box-material {
   position: relative;
   width: 800px;
   height: 300px;
   /* background-color: blue; */
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
+  border-radius: 30px;
 }
 .view-materi {
   position: absolute;

@@ -22064,3 +22064,7 @@ dl li {
   background-color: #cdc1ff;
   background-image: linear-gradient(316deg, #cdc1ff 0%, #e5d9f2 74%);
 }
+
+.pill {
+  border-radius: 30px;
+}

@@ -1,0 +1,26 @@
+<template>
+  <div>
+    <div class="card rounded">
+      <img :src="img" class="card-img-top" width="100%" height="100%" />
+      <div class="row px-2">
+        <div class="col">
+          <h5 class="p-0 pt-2 m-0">{{ nama }}</h5>
+          <p class="">Student</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  props: {
+    nama: String,
+    // role: String,
+    img: {
+      type: String,
+      default:
+        "https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png"
+    }
+  }
+};
+</script>

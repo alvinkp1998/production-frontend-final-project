@@ -17,7 +17,7 @@
 export default {
   props: {
     name: { type: String, default: "input" },
-    value: { type: String, default: "" },
+    value: { default: "" },
     type: { type: String, default: "text" }
   },
   computed: {

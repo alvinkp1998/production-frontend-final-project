@@ -12,12 +12,38 @@
       >
         <span>Detail Kelas</span>
       </a>
-      <button @click="confirmGabung" class="btn btn-primary btn-sm pill arrow">
+      <div class="btn-group dropright">
+        <button
+          class="btn btn-primary btn-sm pill dropdown-toggle"
+          data-toggle="dropdown"
+        >
+          <span>Gabung kelas</span>
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" @click="confirmGabungTutor"
+            >Join Sebagai Tutor</a
+          >
+          <a class="dropdown-item" @click="confirmGabungStudent"
+            >Join Sebagai Student</a
+          >
+          <a class="dropdown-item" @click="confirmGabungFasilitator"
+            >Join Sebagai Fasilitator</a
+          >
+        </div>
+      </div>
+      <!-- <button class="btn btn-primary btn-sm pill arrow" @click="confirmGabung">
         <span>Gabung kelas</span>
-      </button>
+      </button> -->
     </div>
+    <button
+      class="btn btn-primary pill"
+      @click="toClassAdmin"
+      v-if="$auth.loggedIn && $auth.user.status == 'admin'"
+    >
+      Isi Kelas
+    </button>
     <div class="float-right">
-      <items-buttonEdit
+      <items-kelas-buttonEdit
         :id="id"
         :kode="kode"
         :nama="nama"
@@ -90,6 +116,18 @@
                       >Jadwal</a
                     >
                   </li>
+                  <li class="nav-item" role="presentation">
+                    <a
+                      class="nav-link"
+                      :id="`pilsl-${namaKelas}-materi-tabs`"
+                      data-toggle="pill"
+                      :href="`#pills-${namaKelas}-materi`"
+                      role="tab"
+                      aria-controls="pills-profile"
+                      aria-selected="false"
+                      >Materi</a
+                    >
+                  </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                   <div
@@ -118,6 +156,14 @@
                         </tr>
                       </tbody>
                     </table>
+                  </div>
+                  <div
+                    class="tab-pane fade"
+                    :id="`pills-${namaKelas}-materi`"
+                    role="tabpanel"
+                    aria-labelledby="pills-profile-tab"
+                  >
+                    asdsa
                   </div>
                 </div>
               </div>
@@ -163,12 +209,53 @@ export default {
     }
   },
   methods: {
-    async confirmGabung() {
+    // async confirmGabung() {
+    //   try {
+    //     if (this.$auth.loggedIn) {
+    //       const yakin = await this.$swal({
+    //         title: "Apakah kamu yakin?",
+    //         text: `Ingin bergabung dengan kelas ${this.namaKelas}.`,
+    //         icon: "question",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#3085d6",
+    //         cancelButtonColor: "#d33",
+    //         confirmButtonText: "Ya, bergabung"
+    //       });
+    //       if (yakin.isConfirmed) {
+    //         const payload = {
+    //           classId: this.id,
+    //           roleId: 3
+    //         };
+    //         const JOIN_KELAS = await this.$axios.$post("/join", payload);
+    //         console.log(JOIN_KELAS);
+    //         this.$swal(
+    //           "Berhasil!",
+    //           `Kamu berhasil bergabung dengan kelas ${this.namaKelas}.`,
+    //           "success"
+    //         );
+    //       }
+    //     } else {
+    //       await this.$swal({
+    //         icon: "warning",
+    //         title: "Tidak bisa bergabung ke kelas",
+    //         text: "Anda harus login terlebih dahulu"
+    //       });
+    //       this.$router.push("/login");
+    //     }
+    //   } catch (error) {
+    //     this.$swal({
+    //       icon: "warning",
+    //       title: "Gagal",
+    //       text: `Anda sudah bergabung dengan kelas ${this.namaKelas}`
+    //     });
+    //   }
+    // },
+    async confirmGabungTutor() {
       try {
         if (this.$auth.loggedIn) {
           const yakin = await this.$swal({
             title: "Apakah kamu yakin?",
-            text: `Ingin bergabung dengan kelas ${this.namaKelas}.`,
+            text: `Ingin bergabung sebagai tutor pada kelas ${this.namaKelas}.`,
             icon: "question",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -177,7 +264,8 @@ export default {
           });
           if (yakin.isConfirmed) {
             const payload = {
-              classId: this.id
+              classId: this.id,
+              roleId: 1
             };
             const JOIN_KELAS = await this.$axios.$post("/join", payload);
             console.log(JOIN_KELAS);
@@ -202,6 +290,91 @@ export default {
           text: `Anda sudah bergabung dengan kelas ${this.namaKelas}`
         });
       }
+    },
+    async confirmGabungFasilitator() {
+      try {
+        if (this.$auth.loggedIn) {
+          const yakin = await this.$swal({
+            title: "Apakah kamu yakin?",
+            text: `Ingin bergabung sebagai fasilitator pada kelas ${this.namaKelas}.`,
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya, bergabung"
+          });
+          if (yakin.isConfirmed) {
+            const payload = {
+              classId: this.id,
+              roleId: 2
+            };
+            const JOIN_KELAS = await this.$axios.$post("/join", payload);
+            console.log(JOIN_KELAS);
+            this.$swal(
+              "Berhasil!",
+              `Kamu berhasil bergabung dengan kelas ${this.namaKelas}.`,
+              "success"
+            );
+          }
+        } else {
+          await this.$swal({
+            icon: "warning",
+            title: "Tidak bisa bergabung ke kelas",
+            text: "Anda harus login terlebih dahulu"
+          });
+          this.$router.push("/login");
+        }
+      } catch (error) {
+        this.$swal({
+          icon: "warning",
+          title: "Gagal",
+          text: `Anda sudah bergabung dengan kelas ${this.namaKelas}`
+        });
+      }
+    },
+    async confirmGabungStudent() {
+      try {
+        if (this.$auth.loggedIn) {
+          const yakin = await this.$swal({
+            title: "Apakah kamu yakin?",
+            text: `Ingin bergabung sebagai student pada kelas ${this.namaKelas}.`,
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya, bergabung"
+          });
+          if (yakin.isConfirmed) {
+            const payload = {
+              classId: this.id,
+              roleId: 3
+            };
+            const JOIN_KELAS = await this.$axios.$post("/join", payload);
+            console.log(JOIN_KELAS);
+            this.$swal(
+              "Berhasil!",
+              `Kamu berhasil bergabung dengan kelas ${this.namaKelas}.`,
+              "success"
+            );
+          }
+        } else {
+          await this.$swal({
+            icon: "warning",
+            title: "Tidak bisa bergabung ke kelas",
+            text: "Anda harus login terlebih dahulu"
+          });
+          this.$router.push("/login");
+        }
+      } catch (error) {
+        this.$swal({
+          icon: "warning",
+          title: "Gagal",
+          text: `Anda sudah bergabung dengan kelas ${this.namaKelas}`
+        });
+      }
+    },
+    toClassAdmin() {
+      this.$router.push(`/kelasku/${this.namaKelas}/${this.id}`);
     }
   }
 };
@@ -251,5 +424,9 @@ span {
 .arrow:hover span:after {
   opacity: 1;
   right: 0;
+}
+
+.dropdown-item {
+  cursor: pointer;
 }
 </style>

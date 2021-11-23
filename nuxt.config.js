@@ -12,19 +12,19 @@ export default {
       { name: "format-detection", content: "telephone=no" }
     ],
     link: [
-      { rel: "shortcut icon", href: "images/favicon.png" },
+      { rel: "shortcut icon", href: "/images/favicon.png" },
       {
         rel: "stylesheet",
-        href: "vendors/iconfonts/mdi/css/materialdesignicons.min.css"
+        href: "/vendors/iconfonts/mdi/css/materialdesignicons.min.css"
       },
       {
         rel: "stylesheet",
-        href: "vendors/css/vendor.bundle.base.css"
+        href: "/vendors/css/vendor.bundle.base.css"
       },
       {
         rel: "stylesheet",
         type: "text/css",
-        href: "css/style.css"
+        href: "/css/style.css"
       },
       {
         rel: "stylesheet",
@@ -33,11 +33,11 @@ export default {
       }
     ],
     script: [
-      { src: "vendors/js/vendor.bundle.base.js" },
-      { src: "vendors/js/vendor.bundle.addons.js" },
-      { src: "js/off-canvas.js" },
-      { src: "js/misc.js" },
-      { src: "js/dashboard.js" }
+      { src: "/vendors/js/vendor.bundle.base.js" },
+      { src: "/vendors/js/vendor.bundle.addons.js" },
+      { src: "/js/off-canvas.js" },
+      { src: "/js/misc.js" },
+      { src: "/js/dashboard.js" }
     ]
   },
 

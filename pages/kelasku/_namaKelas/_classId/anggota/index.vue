@@ -1,104 +1,53 @@
 <template>
   <div class="container">
-    <h4>Tutor & SPV</h4>
+    <h3>Teachers</h3>
     <hr />
     <div class="row">
       <div
         class="col-sm-4 col-md-3 col-6"
-        v-for="(tutorspv, i) in tutorspvs"
-        :key="i"
+        v-for="item in listTeachers"
+        :key="item.id"
       >
-        <anggota
-          :nama="tutorspv.nama"
-          :role="tutorspv.role"
-          :img="tutorspv.img"
-        />
+        <class-anggota :nama="item.nama" />
       </div>
     </div>
 
-    <h4>Student</h4>
-    <hr />
+    <h3 class="float-left">Classmates</h3>
+    <h4 class="float-right">{{ listStudents.length }} students</h4>
+    <hr style="clear:both;" />
     <div class="row">
       <div
         class="col-sm-4 col-md-3 col-6"
-        v-for="(student, i) in students"
-        :key="i"
+        v-for="item in listStudents"
+        :key="item.id"
       >
-        <anggota :nama="student.nama" :role="student.role" :img="student.img" />
+        <class-anggota :nama="item.nama" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import request from "../../../../../mixins/request.vue";
 export default {
+  mixins: [request],
   data() {
     return {
-      tutorspvs: [
-        {
-          nama: "Ghany Ersa Abdillah",
-          role: "Tutor",
-          img:
-            "https://cdnt.orami.co.id/unsafe/468x288/cdn-cas.orami.co.id/parenting/images/gong_yoo_korea.width-800.jpg"
-        },
-        {
-          nama: "Atika Rahmawati",
-          role: "SPV",
-          img:
-            "https://asset.kompas.com/crops/qEzp1lRjF_h3AOjVv8rhNwzoomU=/0x500:1000x1167/750x500/data/photo/2018/08/19/2853283469.jpg"
-        }
-      ],
-      students: [
-        {
-          nama: "Alvin Kusuma Putra",
-          role: "Student",
-          img:
-            "https://cdn06.pramborsfm.com/storage/app/media/Prambors/Editorial/JI%20CHANG%20WOOK-20210726122921.jpg?tr=w-800"
-        },
-        {
-          nama: "Alvin Kusuma Putra",
-          role: "Student",
-          img:
-            "https://cdn06.pramborsfm.com/storage/app/media/Prambors/Editorial/JI%20CHANG%20WOOK-20210726122921.jpg?tr=w-800"
-        },
-        {
-          nama: "Alvin Kusuma Putra",
-          role: "Student",
-          img:
-            "https://cdn06.pramborsfm.com/storage/app/media/Prambors/Editorial/JI%20CHANG%20WOOK-20210726122921.jpg?tr=w-800"
-        },
-        {
-          nama: "Alvin Kusuma Putra",
-          role: "Student",
-          img:
-            "https://cdn06.pramborsfm.com/storage/app/media/Prambors/Editorial/JI%20CHANG%20WOOK-20210726122921.jpg?tr=w-800"
-        },
-        {
-          nama: "Alvin Kusuma Putra",
-          role: "Student",
-          img:
-            "https://cdn06.pramborsfm.com/storage/app/media/Prambors/Editorial/JI%20CHANG%20WOOK-20210726122921.jpg?tr=w-800"
-        },
-        {
-          nama: "Alvin Kusuma Putra",
-          role: "Student",
-          img:
-            "https://cdn06.pramborsfm.com/storage/app/media/Prambors/Editorial/JI%20CHANG%20WOOK-20210726122921.jpg?tr=w-800"
-        },
-        {
-          nama: "Alvin Kusuma Putra",
-          role: "Student",
-          img:
-            "https://cdn06.pramborsfm.com/storage/app/media/Prambors/Editorial/JI%20CHANG%20WOOK-20210726122921.jpg?tr=w-800"
-        },
-        {
-          nama: "Alvin Kusuma Putra",
-          role: "Student",
-          img:
-            "https://cdn06.pramborsfm.com/storage/app/media/Prambors/Editorial/JI%20CHANG%20WOOK-20210726122921.jpg?tr=w-800"
-        }
-      ]
+      listStudents: [],
+      listTeachers: []
     };
+  },
+  methods: {
+    async GET_LIST_ANGGOTA() {
+      const LIST_ANGGOTA = await this.requestGet(
+        `/join/${this.$route.params.classId}`
+      );
+      console.log(LIST_ANGGOTA);
+      this.listStudents = LIST_ANGGOTA.data;
+    }
+  },
+  mounted() {
+    this.GET_LIST_ANGGOTA();
   }
 };
 </script>

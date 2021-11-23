@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col-md-3 overflow-auto pb-5">
-        <div class="card">
+        <!-- <div class="card">
           <div
             class="nav flex-column nav-pills"
             id="v-pills-tab"
@@ -38,7 +38,7 @@
               </div>
             </a>
           </div>
-        </div>
+        </div> -->
 
         <div class="text-center">
           <nuxt-link :to="`/kelasku/${$route.params.classId}/jadwal/add-jadwal`"
@@ -50,7 +50,7 @@
       </div>
       <div class="col-md-3">
         <div>
-          <div class="card">
+          <!-- <div class="card">
             <div class="card-body">
               <div class="row border-black border-bottom">
                 <div class="col">
@@ -75,7 +75,7 @@
                 </a>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <div class="text-center">
             <nuxt-link

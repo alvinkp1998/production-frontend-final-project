@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <h1 class="display-4 mb-3">Sesi {{ $route.params.sessionId }}</h1>
+      <h1 class="display-4 mb-3">Materi</h1>
     </div>
     <div v-for="item in listMateri" :key="item.id">
       <div class=" jumbotron-fluid mt-3 mb-5">
@@ -25,6 +25,10 @@
         </div>
       </div>
     </div>
+    <items-materi-buttonCreate
+      @refreshData="GET_LIST_MATERI"
+      v-if="$auth.loggedIn && $auth.user.status == 'admin'"
+    />
   </div>
 </template>
 

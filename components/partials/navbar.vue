@@ -7,10 +7,10 @@
         class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"
       >
         <nuxt-link class="navbar-brand brand-logo" to="/"
-          ><img src="images/fs.png" alt="logo"
+          ><img src="/images/fs.png" alt="logo"
         /></nuxt-link>
         <nuxt-link class="navbar-brand brand-logo-mini" to="/"
-          ><img src="images/fs-mini.png" alt="logo"
+          ><img src="/images/fs-mini.png" alt="logo"
         /></nuxt-link>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-stretch bg">
@@ -43,7 +43,11 @@
             >
           </li>
           <!-- <li class="nav-item border-right">
-            <nuxt-link class="nav-link" :to="`/kelasku/${$route.params.classId}/jadwal`"
+            <nuxt-link
+              class="nav-link"
+              :to="
+                `/kelasku/${$route.params.classId}/${$route.params.classId}/jadwal`
+              "
               >Sesi</nuxt-link
             >
           </li> -->
@@ -67,7 +71,10 @@
               aria-expanded="false"
             >
               <div class="nav-profile-img">
-                <img src="images/fotoku.jpg" alt="image" />
+                <img
+                  src="https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png"
+                  alt="image"
+                />
                 <span class="availability-status online"></span>
               </div>
               <div class="nav-profile-text">
@@ -124,7 +131,7 @@
               <a class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                   <img
-                    src="images/faces/face4.jpg"
+                    src="/images/faces/face4.jpg"
                     alt="image"
                     class="profile-pic"
                   />
@@ -144,7 +151,7 @@
               <a class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                   <img
-                    src="images/faces/face2.jpg"
+                    src="/images/faces/face2.jpg"
                     alt="image"
                     class="profile-pic"
                   />
@@ -164,7 +171,7 @@
               <a class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
                   <img
-                    src="images/faces/face3.jpg"
+                    src="/images/faces/face3.jpg"
                     alt="image"
                     class="profile-pic"
                   />
