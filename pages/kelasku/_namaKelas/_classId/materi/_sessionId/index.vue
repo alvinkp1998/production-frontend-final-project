@@ -24,6 +24,7 @@
               :id="item.id"
               :namaMateri="item.namaMateri"
               :jenisMateri="item.jenisMateri"
+              @refreshData="GET_LIST_MATERI"
               v-if="$auth.loggedIn && $auth.user.status == 'admin'"
             />
 

@@ -117,7 +117,7 @@
                       >Jadwal</a
                     >
                   </li>
-                  <li class="nav-item" role="presentation">
+                  <!-- <li class="nav-item" role="presentation">
                     <a
                       class="nav-link"
                       :id="`pilsl-${namaKelas}-materi-tabs`"
@@ -128,7 +128,7 @@
                       aria-selected="false"
                       >Materi</a
                     >
-                  </li>
+                  </li> -->
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                   <div
@@ -158,14 +158,14 @@
                       </tbody>
                     </table>
                   </div>
-                  <div
+                  <!-- <div
                     class="tab-pane fade"
                     :id="`pills-${namaKelas}-materi`"
                     role="tabpanel"
                     aria-labelledby="pills-profile-tab"
                   >
-                    asdsa
-                  </div>
+                    
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -186,7 +186,14 @@
 </template>
 
 <script>
+import request from "../../mixins/request.vue";
 export default {
+  mixins: [request],
+  data() {
+    return {
+      listSesi: []
+    };
+  },
   props: {
     id: { type: Number },
     kode: { type: String },
@@ -369,10 +376,17 @@ export default {
     },
     toClassAdmin() {
       this.$router.push(`/kelasku/${this.namaKelas}/${this.id}`);
-    },
-    toEditPage() {
-      this.$router.push(`/admin/${this.id}/editClass`);
     }
+    // async GET_LIST_SESI() {
+    //   const LIST_SESI = await this.requestGet(`/sesi`);
+    //   console.log(LIST_SESI);
+
+    //   this.listSesi = LIST_SESI.data;
+    //   console.log(this.listSesi);
+    // },
+    // mounted() {
+    //   this.GET_LIST_SESI();
+    // }
   }
 };
 </script>

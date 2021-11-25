@@ -83,12 +83,20 @@ export default {
   methods: {
     async updateMateri() {
       try {
-        const UPDATE_KELAS = await this.$axios.$put("/kelas/", this.id);
-        console.log(UPDATE_KELAS);
+        const payload = {
+          namaMateri: this.namaMateri,
+          file: this.file,
+          jenisMateri: this.jenisMateri
+        };
+        const UPDATE_MATERI = await this.$axios.$put(
+          `/materi/${this.id}`,
+          payload
+        );
+        console.log(UPDATE_MATERI);
         this.$swal({
           icon: "success",
           title: "Success",
-          text: "Kelas berhasil diupdate",
+          text: "Materi berhasil diupdate",
           timer: "2000"
         });
         $(".modal").modal("hide");
@@ -97,7 +105,7 @@ export default {
         this.$swal({
           icon: "danger",
           title: "Waahhh",
-          text: "Kelas gagal diupdate"
+          text: "Materi gagal diupdate"
         });
       }
     }
