@@ -9,6 +9,18 @@ export default {
         showCancelButton: true
       });
     },
+    async requestPost(url) {
+      try {
+        const data = await this.$axios.$post(url);
+        return data;
+      } catch (error) {
+        this.$swal({
+          icon: "warning",
+          title: "Gagal menambah data!",
+          text: error.toString()
+        });
+      }
+    },
     async requestGet(url) {
       try {
         const data = await this.$axios.$get(url);

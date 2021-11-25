@@ -1,27 +1,18 @@
 <template>
   <div class="container">
-    <h3>Teachers</h3>
-    <hr />
-    <div class="row">
-      <div
-        class="col-sm-4 col-md-3 col-6"
-        v-for="item in listTeachers"
-        :key="item.id"
-      >
-        <class-anggota :nama="item.nama" />
-      </div>
-    </div>
-
-    <h3 class="float-left">Classmates</h3>
-    <h4 class="float-right">{{ listStudents.length }} students</h4>
+    <h3 class="float-left">Anggota</h3>
+    <h4 class="float-right">{{ listAnggota.length }} anggota</h4>
     <hr style="clear:both;" />
     <div class="row">
       <div
         class="col-sm-4 col-md-3 col-6"
-        v-for="item in listStudents"
+        v-for="item in listAnggota"
         :key="item.id"
       >
-        <class-anggota :nama="item.nama" />
+        <class-anggota
+          :nama="item.nama"
+          :roleId="item.Classes[0].JoinClasses.RoleId"
+        />
       </div>
     </div>
   </div>
@@ -33,8 +24,7 @@ export default {
   mixins: [request],
   data() {
     return {
-      listStudents: [],
-      listTeachers: []
+      listAnggota: []
     };
   },
   methods: {
@@ -43,7 +33,7 @@ export default {
         `/join/${this.$route.params.classId}`
       );
       console.log(LIST_ANGGOTA);
-      this.listStudents = LIST_ANGGOTA.data;
+      this.listAnggota = LIST_ANGGOTA.data;
     }
   },
   mounted() {

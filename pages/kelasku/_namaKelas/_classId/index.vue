@@ -37,7 +37,7 @@
           />
           <div v-if="$auth.loggedIn && $auth.user.status == 'admin'">
             <button
-              class="btn btn-danger btn-sm pill mt-3"
+              class="btn btn-danger btn-sm pill mt-3 mr-4"
               @click="deleteSesi(item.id, item.namaSesi)"
             >
               Hapus

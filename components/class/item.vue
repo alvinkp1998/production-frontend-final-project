@@ -27,6 +27,7 @@
         :tanggalMulai="tanggalMulai"
         :tanggalSelesai="tanggalSelesai"
         :foto="foto"
+        @refreshData="$emit('refreshData')"
       />
     </div>
   </div>

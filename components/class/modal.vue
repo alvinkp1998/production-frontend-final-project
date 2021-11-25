@@ -51,6 +51,7 @@
         :tanggalMulai="tanggalMulai"
         :tanggalSelesai="tanggalSelesai"
         :foto="foto"
+        @refreshData="$emit('refreshData')"
         v-if="$auth.loggedIn && $auth.user.status == 'admin'"
       />
     </div>
@@ -175,13 +176,6 @@
                 data-dismiss="modal"
               >
                 Tutup
-              </button>
-              <button
-                @click="confirmGabung"
-                type="button"
-                class="btn btn-primary pill"
-              >
-                Gabung kelas
               </button>
             </div>
           </div>
@@ -375,6 +369,9 @@ export default {
     },
     toClassAdmin() {
       this.$router.push(`/kelasku/${this.namaKelas}/${this.id}`);
+    },
+    toEditPage() {
+      this.$router.push(`/admin/${this.id}/editClass`);
     }
   }
 };

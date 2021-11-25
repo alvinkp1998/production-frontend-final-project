@@ -41,27 +41,36 @@
                 name="Nama Materi"
                 @get="val => (detailMateri.namaMateri = val)"
               />
-              <input-type name="file" @get="val => (detailMateri.file = val)" />
-              <!-- <div class="row">
+              <input-type
+                type="file"
+                name="file"
+                @get="val => (detailMateri.file = val)"
+              />
+              <input-type
+                name="Jenis Materi"
+                @get="val => (detailMateri.jenisMateri = val)"
+              />
+              <!-- 
+              <div class="row">
                 <div class="col-md-3">
                   <label class="text-capitalize" for="">Jenis Materi</label>
                 </div>
                 <div class="col-md-9">
                   <input
                     type="radio"
-                    id="ppt"
-                    :value="detailMateri.jenisMateri[1]"
-                    :name="detailMateri.jenisMateri"
+                    id="powerpoint"
+                    :value="detailMateri.jenisMaterippt"
+                    name="jenisMateri"
                   />
-                  <label for="ppt">Power Point</label>
+                  <label for="powerpoint">Power Point</label>
 
                   <input
                     type="radio"
                     id="recording"
-                    :value="detailMateri.jenisMateri[0]"
-                    :name="detailMateri.jenisMateri"
+                    :value="detailMateri.jenisMateri"
+                    name="jenisMateri"
                   />
-                  <label for="recording">Recording</label>
+                  <label for="recording">recording</label>
                 </div>
               </div> -->
             </div>
@@ -92,6 +101,8 @@ export default {
         namaMateri: "",
         file: "",
         jenisMateri: "",
+        // jenisMateri: "recording",
+        // jenisMaterippt: "powerpoint",
         SessionId: this.$route.params.sessionId
       }
     };

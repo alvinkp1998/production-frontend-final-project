@@ -5,7 +5,7 @@
       class="btn btn-primary btn-sm pill"
       type="button"
       data-toggle="modal"
-      data-target="#modalEdit"
+      :data-target="`#edit${id}`"
     >
       Edit Kelas
     </button>
@@ -13,7 +13,7 @@
     <!-- Modal -->
     <div
       class="modal fade"
-      id="modalEdit"
+      :id="`edit${id}`"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalCenterTitle"
@@ -36,20 +36,38 @@
           </div>
           <form @submit.prevent="updateKelas">
             <div class="modal-body">
-              <input-type name="Kode Kelas" v-model="kode" />
-              <input-type name="Nama Kelas" v-model="nama" />
-              <input-type name="Deskripsi Kelas" v-model="deskripsi" />
+              <input-type
+                name="Kode Kelas"
+                :value="kode"
+                @get="val => (kode = val)"
+              />
+              <input-type
+                name="Nama Kelas"
+                :value="nama"
+                @get="val => (nama = val)"
+              />
+              <input-type
+                name="Deskripsi Kelas"
+                :value="deskripsi"
+                @get="val => (deskripsi = val)"
+              />
               <input-type
                 type="date"
                 name="Tanggal Mulai"
-                v-model="tanggalMulai"
+                :value="tanggalMulai"
+                @get="val => (tanggalMulai = val)"
               />
               <input-type
                 type="date"
                 name="Tanggal Selesai"
-                v-model="tanggalSelesai"
+                :value="tanggalSelesai"
+                @get="val => (tanggalSelesai = val)"
               />
-              <input-type name="Foto Kelas" v-model="foto" />
+              <input-type
+                name="Foto Kelas"
+                :value="foto"
+                @get="val => (foto = val)"
+              />
             </div>
             <div class="modal-footer">
               <button
@@ -84,7 +102,19 @@ export default {
   methods: {
     async updateKelas() {
       try {
-        const UPDATE_KELAS = await this.$axios.$put("/kelas/", this.id);
+        const payload = {
+          id: this.id,
+          kodeKelas: this.kode,
+          namaKelas: this.nama,
+          deskripsiKelas: this.deskripsi,
+          tanggalMulai: this.tanggalMulai,
+          tanggalSelesai: this.tanggalSelesai,
+          fotoKelas: this.foto
+        };
+        const UPDATE_KELAS = await this.$axios.$put(
+          `/kelas/${payload.id}`,
+          payload
+        );
         console.log(UPDATE_KELAS);
         this.$swal({
           icon: "success",

@@ -4,22 +4,36 @@
       <h1 class="display-4 mb-3">Materi</h1>
     </div>
     <div v-for="item in listMateri" :key="item.id">
-      <div class=" jumbotron-fluid mt-3 mb-5">
-        <div class="container materi mb-5">
-          <div class="row shadow-sm">
-            <div class="box pt-3 pb-3">
-              <div class="col-1 mr-4">
-                <img
-                  src="/images/materi.jpg"
-                  width="50px"
-                  height="100%"
-                  alt="materi"
-                />
-              </div>
-              <div class="col">
-                <h4>{{ item.namaMateri }}</h4>
-                <h5>{{ item.jenisMateri }}</h5>
-              </div>
+      <div class="container materi mb-5 mt-3">
+        <div class="row shadow-sm">
+          <div class="box pt-3 pb-3">
+            <div class="col-1 mr-4">
+              <img
+                src="/images/materi.jpg"
+                width="50px"
+                height="100%"
+                alt="materi"
+              />
+            </div>
+            <div class="col">
+              <h4>{{ item.namaMateri }}</h4>
+              <h5>{{ item.jenisMateri }}</h5>
+            </div>
+
+            <items-materi-buttonEdit
+              :id="item.id"
+              :namaMateri="item.namaMateri"
+              :jenisMateri="item.jenisMateri"
+              v-if="$auth.loggedIn && $auth.user.status == 'admin'"
+            />
+
+            <div v-if="$auth.loggedIn && $auth.user.status == 'admin'">
+              <button
+                class="btn btn-danger btn-sm pill mt-3 mr-4"
+                @click="deleteMateri(item.id, item.namaMateri)"
+              >
+                Hapus
+              </button>
             </div>
           </div>
         </div>
@@ -48,6 +62,13 @@ export default {
       );
       console.log(LIST_MATERI);
       this.listMateri = LIST_MATERI;
+    },
+    async deleteMateri(id, nama) {
+      const confirm = await this.confirm(`Menghapus Materi ${nama}`);
+      if (confirm.isConfirmed) {
+        await this.requestDelete(`/materi/${id}`);
+        this.GET_LIST_MATERI();
+      }
     }
   },
   mounted() {
