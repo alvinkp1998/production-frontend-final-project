@@ -40,7 +40,7 @@ export default {
     async GET_LIST_CLASS() {
       const LIST_CLASS = await this.requestGet("/kelas");
       console.log(LIST_CLASS);
-      this.listClass = LIST_CLASS.requestDB;
+      this.listClass = LIST_CLASS;
     }
   },
 

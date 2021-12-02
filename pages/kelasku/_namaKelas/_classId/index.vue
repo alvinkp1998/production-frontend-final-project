@@ -45,16 +45,40 @@
           </div>
         </div>
         <div class="box-material collapse shadow " :id="item.id">
-          <button
-            class="view-materi"
-            @click="
-              $router.push(
-                `/kelasku/${$route.params.namaKelas}/${$route.params.classId}/materi/${item.id}`
-              )
-            "
-          >
-            View Material
-          </button>
+          <div class="row ml-3">
+            <div
+              class="col-md-5 kotak ml-3 mt-3 shadow-sm"
+              v-for="material in item.Materials"
+              :key="material.id"
+            >
+              <div class="row ml-2">
+                <div class="col-md-4 pt-2 ">
+                  <img
+                    src="https://1.bp.blogspot.com/-LICFT7WO2vw/XipEPK6u2TI/AAAAAAAACW0/kj_E5a34EcQ0ofc929GlEfmS_XzXp-S4wCLcBGAsYHQ/s1600/index.png"
+                    alt=""
+                    width="80px"
+                    height="80px"
+                  />
+                </div>
+                <div class="col-md-8 pt-3">
+                  <h4>{{ material.namaMateri }}</h4>
+                  <p>{{ material.jenisMateri }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button
+              class="view-materi"
+              @click="
+                $router.push(
+                  `/kelasku/${$route.params.namaKelas}/${$route.params.classId}/materi/${item.id}`
+                )
+              "
+            >
+              View Material
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -86,9 +110,7 @@ export default {
         `/sesi/${this.$route.params.classId}`
       );
       console.log(LIST_SESI);
-
-      this.listSesi = LIST_SESI.data;
-      console.log(this.listSesi);
+      this.listSesi = LIST_SESI;
     },
     toMaterial() {
       this.$router.push(
@@ -128,6 +150,13 @@ export default {
   justify-content: center;
   width: 700px;
 }
+.kotak {
+  border-radius: 10px;
+  cursor: pointer;
+}
+.kotak:hover {
+  color: rgb(176, 102, 190);
+}
 .display-4 {
   margin: auto;
 }
@@ -155,13 +184,14 @@ export default {
 .box-material {
   position: relative;
   width: 800px;
-  height: 300px;
+  height: 400px;
   /* background-color: blue; */
   border-radius: 30px;
 }
 .view-materi {
   position: absolute;
   border: none;
+  bottom: 0;
   background-color: white;
   border-radius: 40px;
   transition: 0.3s ease-in-out;
@@ -169,7 +199,7 @@ export default {
   font-size: 20px;
   color: #ae9bfc;
   padding: 10px;
-  bottom: 0;
+
   margin-left: 15px;
   margin-bottom: 15px;
 }

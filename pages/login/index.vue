@@ -98,18 +98,16 @@ export default {
           data: this.login
         });
         console.log(response);
-        if (this.$auth.user) {
-          this.$swal({
-            icon: "success",
-            title: `Hi, Selamat Datang ${this.$auth.user.nama}`,
-            text: "Kamu berhasil login",
-            timer: 3000
-          });
-          this.$router.push("/");
-        } else {
-          this.incorrect = false;
-        }
+
+        this.$swal({
+          icon: "success",
+          title: `Hi, Selamat Datang ${this.$auth.user.nama}`,
+          text: "Kamu berhasil login",
+          timer: 3000
+        });
+        this.$router.push("/");
       } catch (err) {
+        this.incorrect = false;
         console.log(err);
       }
     }

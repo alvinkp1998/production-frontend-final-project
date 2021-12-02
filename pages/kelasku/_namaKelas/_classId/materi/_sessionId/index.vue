@@ -3,10 +3,30 @@
     <div class="container">
       <h1 class="display-4 mb-3">Materi</h1>
     </div>
-    <div v-for="item in listMateri" :key="item.id">
-      <div class="container materi mb-5 mt-3">
-        <div class="row shadow-sm">
-          <div class="box pt-3 pb-3">
+    <div>
+      <div class="container garis">
+        <div class="row">
+          <div
+            class="col-md-5 kotak ml-3 mt-3 shadow-sm"
+            v-for="item in listMateri"
+            :key="item.id"
+          >
+            <div class="row">
+              <div class="col-md-4 pt-4 ">
+                <img
+                  src="https://1.bp.blogspot.com/-LICFT7WO2vw/XipEPK6u2TI/AAAAAAAACW0/kj_E5a34EcQ0ofc929GlEfmS_XzXp-S4wCLcBGAsYHQ/s1600/index.png"
+                  alt=""
+                  width="100px"
+                  height="100px"
+                />
+              </div>
+              <div class="col-md-8 pt-5">
+                <h4>{{ item.namaMateri }}</h4>
+                <p>{{ item.jenisMateri }}</p>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="box pt-3 pb-3">
             <div class="col-1 mr-4">
               <img
                 src="/images/materi.jpg"
@@ -36,7 +56,7 @@
                 Hapus
               </button>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -79,6 +99,18 @@ export default {
 </script>
 
 <style scoped>
+.kotak {
+  border-radius: 10px;
+  height: 150px;
+  cursor: pointer;
+}
+.kotak:hover {
+  color: rgb(176, 102, 190);
+}
+
+.garis {
+  border-top: 2px solid rgb(221, 194, 223);
+}
 .jumbotron {
   border-radius: 20px;
   color: #524e4e;
@@ -87,28 +119,6 @@ export default {
   background-image: linear-gradient(316deg, #cdc1ff 0%, #e5d9f2 74%) !important;
 }
 
-.container {
-  display: flex;
-  width: 40%;
-  height: 100%;
-}
-.container.materi {
-  display: flex;
-  justify-content: center;
-  width: 700px;
-}
-.display-4 {
-  margin: auto;
-}
-.background-purple {
-  background-color: #cdc1ff;
-  background-image: linear-gradient(316deg, #cdc1ff 0%, #e5d9f2 74%);
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
-}
-.background-white {
-  background-color: white;
-}
 .box {
   /* background-color: rgb(237, 212, 243); */
   display: flex;

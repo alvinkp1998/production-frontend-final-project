@@ -85,10 +85,10 @@
               class="dropdown-menu navbar-dropdown"
               aria-labelledby="profileDropdown"
             >
-              <a class="dropdown-item" href="#">
+              <nuxt-link to="/profile" class="dropdown-item">
                 <i class="mdi mdi-cached mr-2 text-success"></i>
-                Activity Log
-              </a>
+                My Profile
+              </nuxt-link>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#" @click="logout">
                 <i class="mdi mdi-logout mr-2 text-primary"></i>
