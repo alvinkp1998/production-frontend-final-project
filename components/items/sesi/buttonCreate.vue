@@ -46,6 +46,10 @@
                 @get="val => (detailSesi.urutanSesi = val)"
               />
               <input-type
+                name="Kode Sesi"
+                @get="val => (detailSesi.kodeSesi = val)"
+              />
+              <input-type
                 type="date"
                 name="Waktu Mulai"
                 @get="val => (detailSesi.waktuMulai = val)"
@@ -84,6 +88,7 @@ export default {
         urutanSesi: "",
         waktuMulai: "",
         waktuSelesai: "",
+        kodeSesi: "",
         ClassId: this.$route.params.classId
       }
     };

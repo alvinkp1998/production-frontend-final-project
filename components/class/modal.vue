@@ -117,18 +117,6 @@
                       >Jadwal</a
                     >
                   </li>
-                  <!-- <li class="nav-item" role="presentation">
-                    <a
-                      class="nav-link"
-                      :id="`pilsl-${namaKelas}-materi-tabs`"
-                      data-toggle="pill"
-                      :href="`#pills-${namaKelas}-materi`"
-                      role="tab"
-                      aria-controls="pills-profile"
-                      aria-selected="false"
-                      >Materi</a
-                    >
-                  </li> -->
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                   <div
@@ -158,14 +146,6 @@
                       </tbody>
                     </table>
                   </div>
-                  <!-- <div
-                    class="tab-pane fade"
-                    :id="`pills-${namaKelas}-materi`"
-                    role="tabpanel"
-                    aria-labelledby="pills-profile-tab"
-                  >
-                    
-                  </div> -->
                 </div>
               </div>
             </div>

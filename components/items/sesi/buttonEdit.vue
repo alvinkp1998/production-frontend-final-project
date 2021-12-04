@@ -45,6 +45,11 @@
                 @get="val => (urutanSesi = val)"
               />
               <input-type
+                name="Kode Sesi"
+                :value="kodeSesi"
+                @get="val => (kodeSesi = val)"
+              />
+              <input-type
                 type="date"
                 name="Waktu Mulai"
                 :value="waktuMulai"
@@ -83,7 +88,8 @@ export default {
     namaSesi: { type: String },
     urutanSesi: { type: Number },
     waktuMulai: { type: String },
-    waktuSelesai: { type: String }
+    waktuSelesai: { type: String },
+    kodeSesi: String
   },
   methods: {
     async updateSesi() {
@@ -92,7 +98,8 @@ export default {
           namaSesi: this.namaSesi,
           urutanSesi: this.urutanSesi,
           waktuMulai: this.waktuMulai,
-          waktuSelesai: this.waktuSelesai
+          waktuSelesai: this.waktuSelesai,
+          kodeSesi: this.kodeSesi
         };
         const UPDATE_SESI = await this.$axios.$put(`/sesi/${this.id}`, payload);
         console.log(UPDATE_SESI);

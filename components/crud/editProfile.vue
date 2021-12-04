@@ -228,10 +228,10 @@ export default {
         tempatLahir: "",
         noHp: "",
         MediaSocial: {
-          facebook: "#",
-          instagram: "#",
-          linkedIn: "#",
-          twitter: "#"
+          facebook: "",
+          instagram: "",
+          linkedIn: "",
+          twitter: ""
         }
       }
     };

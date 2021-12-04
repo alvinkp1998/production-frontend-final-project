@@ -29,6 +29,7 @@
           <items-sesi-buttonEdit
             :id="item.id"
             :namaSesi="item.namaSesi"
+            :kodeSesi="item.kodeSesi"
             :urutanSesi="item.urutanSesi"
             :waktuMulai="item.waktuMulai"
             :waktuSelesai="item.waktuSelesai"

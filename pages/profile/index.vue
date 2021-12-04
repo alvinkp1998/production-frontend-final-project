@@ -30,7 +30,6 @@
           </div>
         </div>
       </div>
-
       <div>
         <div class="box-medsos float-left mb-3">
           <div class="row">
@@ -52,24 +51,46 @@
             </div>
           </div>
         </div>
-        <!-- <crud-editProfile
-          :id="user.id"
-          :nama="user.nama"
-          :tempatLahir="user.tempatLahir"
-          :tanggalLahir="user.tanggalLahir"
-          :noHp="user.noHp"
-          :pendidikan="user.pendidikanTerakhir"
-          :institusi="user.institusi"
-          :pekerjaan="user.pekerjaan"
-          @refreshData="GET_USER"
-        /> -->
         <button class="btn btn-primary pill float-right" @click="toEdit">
           Edit Profile
         </button>
       </div>
-      <div class="card" style="clear: both;">
-        <div class="card-body"></div>
-      </div>
+      <!-- <div class="card" style="clear: both;">
+        <div class="card-body ml-auto mr-auto">
+          <div class="container ">
+            <h4 class="text-center">
+              Data Diri
+              <hr />
+            </h4>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="container-fluid">
+                  <h6>Email</h6>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="container-fluid">
+                  <h6>Phone</h6>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="container-fluid">
+                  <h6>Job</h6>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="container-fluid mt-3">
+                  <h6>Address</h6>
+                  <p></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -170,8 +191,7 @@ export default {
   color: white;
 }
 
-.card-body {
-  width: 400px;
-  /* background-color: blue; */
+.card {
+  max-width: 500px;
 }
 </style>

@@ -66,7 +66,7 @@ export default {
         {
           name: "Presensi",
           icon: "fas fa-check-square menu-icon",
-          to: "/"
+          to: "/presensi"
         }
       ]
     };

@@ -61,7 +61,7 @@ export default {
     "vue-sweetalert2/nuxt",
     // Nuxt Auth
     "@nuxtjs/auth-next",
-    "@nuxtjs/proxy"
+    "@nuxtjs/vuetify"
   ],
   router: {
     middleware: ["auth"]
