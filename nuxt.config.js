@@ -60,8 +60,7 @@ export default {
     // Sweet Alert Nuxt
     "vue-sweetalert2/nuxt",
     // Nuxt Auth
-    "@nuxtjs/auth-next",
-    "@nuxtjs/vuetify"
+    "@nuxtjs/auth-next"
   ],
   router: {
     middleware: ["auth"]
