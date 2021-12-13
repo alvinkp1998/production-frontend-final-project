@@ -6,7 +6,7 @@
     >
       <a
         type="button"
-        class="btn btn-secondary pill btn-sm mt-1 arrow"
+        class="btn btn-secondary pill btn-sm mt-1"
         data-toggle="modal"
         :data-target="`#${namaKelas}`"
       >
