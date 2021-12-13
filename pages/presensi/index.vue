@@ -12,7 +12,7 @@
               :href="`#kelas${kelas.id}`"
               ><h3>
                 <i class="fas fa-caret-right"></i> {{ kelas.namaKelas }} -
-                {{ kelas.kodeKelas }}
+                {{ kelas.kodeKelas }} ({{ kelas.Sessions.length }} Sesi)
               </h3></a
             >
           </li>
@@ -30,8 +30,15 @@
                     class="nav-link mb-2 "
                     :href="`#sesi${sesi.id}`"
                     data-toggle="collapse"
-                    ><h5>Sesi {{ sesi.urutanSesi }}</h5></a
-                  >
+                    ><h5>
+                      <i class="fas fa-angle-right"></i> Sesi
+                      {{ sesi.urutanSesi }}
+                      <span
+                        class="badge badge-pill badge-success p-1 ml-1"
+                        v-show="sesi.absen === 'Sudah Absen'"
+                        ><i class="fas fa-check"></i
+                      ></span></h5
+                  ></a>
                 </li>
                 <div class="container-fluid">
                   <div :id="`sesi${sesi.id}`" class="collapse">
@@ -70,36 +77,38 @@
                         </span>
                       </div>
                     </div>
-                    <p style="font-style: italic">
-                      Note: Presensi dilakukan saat sesi sudah dibuka, silahkan
-                      presensi dengan menginputkan kode sesi yang diberikan
-                      setelah sesi selesai.
-                    </p>
-                    <div class="kode mb-2 mt-3 pt-2">
-                      <span class="box-kode">Masukkan Kode Sesi</span>
-                    </div>
-                    <form
-                      @submit.prevent="
-                        submitPresensi(sesi.kodeSesi, kelas.kodeKelas)
-                      "
-                    >
-                      <div class="row">
-                        <div class="col-md-10">
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Masukkan Kode Sesi"
-                            required
-                            v-model="kodeSesi"
-                          />
-                        </div>
-                        <div class="col-md-2">
-                          <button class="btn btn-primary btn-block">
-                            <i class="fas fa-key"></i> Kode
-                          </button>
-                        </div>
+                    <div v-if="sesi.absen === 'Belum Absen'">
+                      <p style="font-style: italic">
+                        Note: Presensi dilakukan saat sesi sudah dibuka,
+                        silahkan presensi dengan menginputkan kode sesi yang
+                        diberikan setelah sesi selesai.
+                      </p>
+                      <div class="kode mb-2 mt-3 pt-2">
+                        <span class="box-kode">Masukkan Kode Sesi</span>
                       </div>
-                    </form>
+                      <form
+                        @submit.prevent="
+                          submitPresensi(sesi.kodeSesi, kelas.kodeKelas)
+                        "
+                      >
+                        <div class="row">
+                          <div class="col-md-10">
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Masukkan Kode Sesi"
+                              required
+                              v-model="kodeSesi"
+                            />
+                          </div>
+                          <div class="col-md-2">
+                            <button class="btn btn-primary btn-block">
+                              <i class="fas fa-key"></i> Kode
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </ul>
@@ -173,7 +182,7 @@ export default {
 <style scoped>
 .card {
   border-radius: 20px;
-  border: 2px solid rgb(72, 42, 88);
+  border: 1px solid rgb(72, 42, 88);
 }
 
 a {

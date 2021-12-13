@@ -20,43 +20,29 @@
                   height="100px"
                 />
               </div>
-              <div class="col-md-8 pt-5">
+              <div class="col-md-6 pt-5">
                 <h4>{{ item.namaMateri }}</h4>
                 <p>{{ item.jenisMateri }}</p>
               </div>
+              <div class="col-md-2">
+                <div v-if="$auth.loggedIn && $auth.user.status == 'admin'">
+                  <items-materi-buttonEdit
+                    :id="item.id"
+                    :namaMateri="item.namaMateri"
+                    :jenisMateri="item.jenisMateri"
+                    :file="item.file"
+                    @refreshData="GET_LIST_MATERI"
+                  />
+                  <button
+                    class="btn btn-danger btn-sm pill mt-3 mr-4"
+                    @click="deleteMateri(item.id, item.namaMateri)"
+                  >
+                    Hapus
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-          <!-- <div class="box pt-3 pb-3">
-            <div class="col-1 mr-4">
-              <img
-                src="/images/materi.jpg"
-                width="50px"
-                height="100%"
-                alt="materi"
-              />
-            </div>
-            <div class="col">
-              <h4>{{ item.namaMateri }}</h4>
-              <h5>{{ item.jenisMateri }}</h5>
-            </div>
-
-            <items-materi-buttonEdit
-              :id="item.id"
-              :namaMateri="item.namaMateri"
-              :jenisMateri="item.jenisMateri"
-              @refreshData="GET_LIST_MATERI"
-              v-if="$auth.loggedIn && $auth.user.status == 'admin'"
-            />
-
-            <div v-if="$auth.loggedIn && $auth.user.status == 'admin'">
-              <button
-                class="btn btn-danger btn-sm pill mt-3 mr-4"
-                @click="deleteMateri(item.id, item.namaMateri)"
-              >
-                Hapus
-              </button>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>

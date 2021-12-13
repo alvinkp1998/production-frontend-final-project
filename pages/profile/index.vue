@@ -1,25 +1,79 @@
 <template>
   <div>
-    <div>
+    <div class="container">
       <div class="jumbotron jumbotron-fluid">
         <div class="container profile">
-          <div class="row">
+          <div class="row ">
             <div class="col-md-2">
               <img
-                src="https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png"
+                :src="
+                  user.foto ||
+                    'https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png'
+                "
                 class="rounded-circle"
-                alt="Cinque Terre"
-                width="170px"
-                height="170px"
+                width="180px"
+                height="180px"
+                data-toggle="modal"
+                data-target="#exampleModal"
               />
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="text-center">
+                        <img
+                          :src="
+                            user.foto ||
+                              'https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png'
+                          "
+                          class="rounded-circle mb-3"
+                          width="250px"
+                          height="250px"
+                        />
+                        <h3>Profile Picture</h3>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <input
+                        type="file"
+                        class="form-control-file"
+                        @change="onFileSelected"
+                      />
+                      <button
+                        type="submit"
+                        class="btn btn-primary btn-block"
+                        @click="upload"
+                      >
+                        Ganti Foto
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <span class="text-white ml-3 mt-4 ">{{ user.nama }}</span>
               <span class="text-white-2 ml-3 mt-5 pt-2"
                 >{{ user.pekerjaan }} at {{ user.institusi }}</span
               >
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="mt-5 ml-5 pl-5">
                 <p class="text-white-2">
                   <i class="fas fa-phone-square-alt"></i>
@@ -31,66 +85,38 @@
         </div>
       </div>
       <div>
-        <div class="box-medsos float-left mb-3">
+        <div class="box-medsos mb-3">
           <div class="row">
             <div class="col-md-3">
               <i class="fab fa-instagram-square"></i>
-              <span>{{ user.MediaSocial.instagram }}</span>
+              <a
+                :href="`https://www.instagram.com/${user.instagram}`"
+                target="_blank"
+                ><span>{{ user.instagram }}</span></a
+              >
             </div>
             <div class="col-md-3">
               <i class="fab fa-linkedin"></i>
-              <span>{{ user.MediaSocial.linkedIn }}</span>
+              <span>{{ user.linkedIn }}</span>
             </div>
             <div class="col-md-3">
               <i class="fab fa-twitter-square"></i>
-              <span>{{ user.MediaSocial.twitter }}</span>
+              <span>{{ user.twitter }}</span>
             </div>
             <div class="col-md-3">
               <i class="fab fa-facebook-square"></i>
-              <span>{{ user.MediaSocial.facebook }}</span>
+              <a
+                :href="`https://www.facebook.com/${user.facebook}`"
+                target="_blank"
+                ><span>{{ user.facebook }}</span></a
+              >
             </div>
           </div>
         </div>
-        <button class="btn btn-primary pill float-right" @click="toEdit">
-          Edit Profile
-        </button>
       </div>
-      <!-- <div class="card" style="clear: both;">
-        <div class="card-body ml-auto mr-auto">
-          <div class="container ">
-            <h4 class="text-center">
-              Data Diri
-              <hr />
-            </h4>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="container-fluid">
-                  <h6>Email</h6>
-                  <p></p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="container-fluid">
-                  <h6>Phone</h6>
-                  <p></p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="container-fluid">
-                  <h6>Job</h6>
-                  <p></p>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="container-fluid mt-3">
-                  <h6>Address</h6>
-                  <p></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
+      <button class="btn btn-primary pill float-right" @click="toEdit">
+        Edit Profile
+      </button>
     </div>
   </div>
 </template>
@@ -101,6 +127,7 @@ export default {
   data() {
     return {
       user: {
+        id: "",
         nama: "",
         email: "",
         alamat: "",
@@ -114,20 +141,19 @@ export default {
         tanggalLahir: "",
         tempatLahir: "",
         noHp: "",
-        MediaSocial: {
-          facebook: "",
-          instagram: "",
-          linkedIn: "",
-          twitter: ""
-        }
-      }
+        facebook: "",
+        instagram: "",
+        linkedIn: "",
+        twitter: ""
+      },
+      foto: null
     };
   },
-  layout: "profile",
   methods: {
     async GET_USER() {
       const USER = await this.requestGet("/profile");
       console.log(USER);
+      this.user.id = USER.id;
       this.user.nama = USER.nama;
       this.user.email = USER.email;
       this.user.alamat = USER.alamat;
@@ -141,13 +167,43 @@ export default {
       this.user.tanggalLahir = USER.tanggalLahir;
       this.user.tempatLahir = USER.tempatLahir;
       this.user.noHp = USER.noHp;
-      this.user.MediaSocial.facebook = USER.MediaSocial.facebook;
-      this.user.MediaSocial.instagram = USER.MediaSocial.instagram;
-      this.user.MediaSocial.linkedIn = USER.MediaSocial.linkedin;
-      this.user.MediaSocial.twitter = USER.MediaSocial.twitter;
+      this.user.facebook = USER.facebook;
+      this.user.instagram = USER.instagram;
+      this.user.linkedIn = USER.linkedIn;
+      this.user.twitter = USER.twitter;
     },
     toEdit() {
       this.$router.push("profile/edit");
+    },
+    onFileSelected(e) {
+      this.foto = e.target.files[0];
+    },
+    async upload() {
+      try {
+        const formData = new FormData();
+        formData.append("img", this.foto);
+        const reqUpload = await this.$axios.$post("/upload/img", formData);
+        console.log(reqUpload);
+        this.user.foto = reqUpload.data;
+
+        const UPDATE_USER = await this.$axios.$put(
+          `/profile/${this.user.id}`,
+          this.user
+        );
+        console.log(UPDATE_USER);
+        await this.$swal({
+          icon: "success",
+          title: "Success",
+          text: "Foto berhasil diupdate",
+          timer: "2000"
+        });
+      } catch (error) {
+        return this.$swal({
+          type: "error",
+          title: "Gagal upload",
+          text: error.toString()
+        });
+      }
     }
   },
   mounted() {
@@ -173,11 +229,17 @@ export default {
 }
 
 .box-medsos {
+  background-color: rgb(232, 216, 250) !important;
   padding: 10px;
   background-color: white;
   border-radius: 40px;
   margin-left: 300px;
   width: 55%;
+}
+
+.box-data {
+  background-color: burlywood;
+  width: 350px;
 }
 
 .text-white {
@@ -190,8 +252,15 @@ export default {
   font-size: 18px;
   color: white;
 }
-
+img:hover {
+  cursor: pointer;
+}
 .card {
   max-width: 500px;
+}
+
+a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
 }
 </style>

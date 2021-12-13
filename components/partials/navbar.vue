@@ -14,20 +14,6 @@
         /></nuxt-link>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-stretch bg">
-        <div class="search-field d-none d-md-block">
-          <form class="d-flex align-items-center h-100" action="#">
-            <div class="input-group">
-              <div class="input-group-prepend bg-transparent">
-                <i class="input-group-text border-0 mdi mdi-magnify"></i>
-              </div>
-              <input
-                type="text"
-                class="form-control bg-transparent border-0"
-                placeholder="Search class"
-              />
-            </div>
-          </form>
-        </div>
         <ul
           v-if="$route.params.namaKelas"
           class="navbar-nav text-black"
@@ -72,7 +58,10 @@
             >
               <div class="nav-profile-img">
                 <img
-                  src="https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png"
+                  :src="
+                    $auth.user.foto ||
+                      'https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png'
+                  "
                   alt="image"
                 />
                 <span class="availability-status online"></span>

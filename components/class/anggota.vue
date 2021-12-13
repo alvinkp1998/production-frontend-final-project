@@ -1,7 +1,12 @@
 <template>
   <div>
-    <div class="card rounded">
-      <img :src="img" class="card-img-top" width="100%" height="100%" />
+    <div class="card">
+      <img
+        :srcset="img"
+        class="card-img-top rounded-circle"
+        width="200px"
+        height="200px"
+      />
       <div class="row px-2">
         <div class="col">
           <h5 class="p-0 pt-2 m-0">{{ nama }}</h5>

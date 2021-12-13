@@ -3,10 +3,13 @@
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
       <ul class="nav">
         <li class="nav-item nav-profile" v-if="$auth.user">
-          <a href="#" class="nav-link">
+          <nuxt-link to="/profile" class="nav-link">
             <div class="nav-profile-image">
               <img
-                src="https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png"
+                :src="
+                  $auth.user.foto ||
+                    'https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png'
+                "
                 alt="profile"
               />
               <span class="login-status online"></span>
@@ -18,7 +21,7 @@
                 >- {{ $auth.user.status }} -</span
               >
             </div>
-          </a>
+          </nuxt-link>
         </li>
         <!-- Tampilan sidebar dari admin -->
         <li

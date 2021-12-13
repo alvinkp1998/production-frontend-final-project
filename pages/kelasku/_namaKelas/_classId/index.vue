@@ -13,7 +13,7 @@
           data-toggle="collapse"
           :data-target="`#${item.id}`"
         >
-          <div class="col-1 mr-4">
+          <div class="col-1 mr-4 ml-3">
             <img
               src="/images/materi.jpg"
               width="50px"
@@ -21,9 +21,16 @@
               alt="materi"
             />
           </div>
-          <div class="col">
+          <div class="col-6" v-if="$auth.user.status == 'admin'">
             <h4>Sesi {{ item.urutanSesi }} - {{ item.namaSesi }}</h4>
             <h5>{{ item.waktuMulai }}</h5>
+          </div>
+          <div class="col" v-else>
+            <h4>Sesi {{ item.urutanSesi }} - {{ item.namaSesi }}</h4>
+            <h5>{{ item.waktuMulai }}</h5>
+          </div>
+          <div class="col" v-if="$auth.user.status == 'admin'">
+            <h5>Kode : {{ item.kodeSesi }}</h5>
           </div>
 
           <items-sesi-buttonEdit

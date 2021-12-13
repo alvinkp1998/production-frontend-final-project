@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="form-edit">
+  <div class="pt-2">
+    <div class="form-edit form-bg ">
       <form class="mt-4" @submit.prevent="updateUser">
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -145,7 +145,7 @@
                 id="inputIg"
                 class="form-control"
                 placeholder="Instagram"
-                v-model="user.MediaSocial.instagram"
+                v-model="user.instagram"
               />
             </div>
           </div>
@@ -162,7 +162,7 @@
                 id="inputLinked"
                 class="form-control"
                 placeholder="LinkedIn"
-                v-model="user.MediaSocial.linkedIn"
+                v-model="user.linkedIn"
               />
             </div>
           </div>
@@ -179,7 +179,7 @@
                 id="inputtwt"
                 class="form-control"
                 placeholder="Twitter"
-                v-model="user.MediaSocial.twitter"
+                v-model="user.twitter"
               />
             </div>
           </div>
@@ -196,7 +196,7 @@
                 id="inputFb"
                 class="form-control"
                 placeholder="Facebook"
-                v-model="user.MediaSocial.facebook"
+                v-model="user.facebook"
               />
             </div>
           </div>
@@ -227,12 +227,10 @@ export default {
         tanggalLahir: "",
         tempatLahir: "",
         noHp: "",
-        MediaSocial: {
-          facebook: "",
-          instagram: "",
-          linkedIn: "",
-          twitter: ""
-        }
+        facebook: "",
+        instagram: "",
+        linkedIn: "",
+        twitter: ""
       }
     };
   },
@@ -255,10 +253,10 @@ export default {
       this.user.tanggalLahir = USER.tanggalLahir;
       this.user.tempatLahir = USER.tempatLahir;
       this.user.noHp = USER.noHp;
-      this.user.MediaSocial.facebook = USER.MediaSocial.facebook;
-      this.user.MediaSocial.instagram = USER.MediaSocial.instagram;
-      this.user.MediaSocial.linkedIn = USER.MediaSocial.linkedin;
-      this.user.MediaSocial.twitter = USER.MediaSocial.twitter;
+      this.user.facebook = USER.facebook;
+      this.user.instagram = USER.instagram;
+      this.user.linkedIn = USER.linkedIn;
+      this.user.twitter = USER.twitter;
     },
     async updateUser() {
       try {
@@ -274,7 +272,6 @@ export default {
           timer: "2000"
         });
         this.$router.push("/profile");
-        this.$emit("refreshData");
       } catch (error) {
         this.$swal({
           icon: "danger",
@@ -292,6 +289,11 @@ export default {
 
 <style scoped>
 .form-edit {
+  border-radius: 20px;
+  padding: 5px 30px 30px 30px;
   width: 50%;
+}
+.form-bg {
+  background-color: rgb(203, 200, 248);
 }
 </style>

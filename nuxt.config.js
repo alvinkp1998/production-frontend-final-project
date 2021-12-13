@@ -81,9 +81,12 @@ export default {
           // autoFetch: true
         },
         endpoints: {
-          login: { url: "login", method: "post" },
+          login: {
+            url: "https://back-end-fullstack-academy.herokuapp.com/login",
+            method: "post"
+          },
           user: {
-            url: `user/me`,
+            url: `https://back-end-fullstack-academy.herokuapp.com/user/me`,
             method: "get"
           },
           logout: false
@@ -94,26 +97,14 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // proxy: true,
-    baseURL: "http://localhost:3000"
+    // baseURL: "http://localhost:3000"
+    baseURL: "https://back-end-fullstack-academy.herokuapp.com"
   },
-
-  // proxy: {
-  //   "/api/": {
-  //     target: "http://localhost:3000",
-  //     pathRewrite: { "^/api/": "" },
-  //     changeOrigin: true
-  //   },
-  //   "/register": {
-  //     target: "http://localhost:3000",
-  //     pathRewrite: { "^/": "" },
-  //     changeOrigin: true
-  //   }
-  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   server: {
-    port: 7000
+    // port: 7000
+    host: "0"
   }
 };

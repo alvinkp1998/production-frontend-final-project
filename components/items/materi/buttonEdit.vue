@@ -41,6 +41,7 @@
                 :value="namaMateri"
                 @get="val => (namaMateri = val)"
               />
+
               <input-type
                 type="file"
                 name="file"
@@ -80,6 +81,12 @@ export default {
     file: String,
     jenisMateri: String
   },
+  // data() {
+  //   return {
+  //     docs: null,
+  //     video: null
+  //   };
+  // },
   methods: {
     async updateMateri() {
       try {
@@ -109,6 +116,42 @@ export default {
         });
       }
     }
+    // onDocsSelected(e) {
+    //   this.docs = e.target.files[0];
+    // },
+    // onVideoSelected(e) {
+    //   this.video = e.target.files[0];
+    // },
+    // async uploadMateriDocs() {
+    //   try {
+    //     const formData = new FormData();
+    //     formData.append("docs", this.docs);
+    //     const reqUpload = await this.$axios.$post("/upload/docs", formData);
+    //     console.log(reqUpload);
+    //     this.file = reqUpload;
+    //   } catch (error) {
+    //     return this.$swal({
+    //       type: "error",
+    //       title: "Gagal upload",
+    //       text: error.toString()
+    //     });
+    //   }
+    // },
+    // async uploadVideo() {
+    //   try {
+    //     const formData = new FormData();
+    //     formData.append("video", this.video);
+    //     const reqUpload = await this.$axios.$post("/upload/videos", formData);
+    //     console.log(reqUpload);
+    //     this.file = reqUpload.data;
+    //   } catch (error) {
+    //     return this.$swal({
+    //       type: "error",
+    //       title: "Gagal upload",
+    //       text: error.toString()
+    //     });
+    //   }
+    // }
   }
 };
 </script>
